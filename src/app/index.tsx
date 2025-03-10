@@ -1,6 +1,16 @@
+import { FC } from "react";
+
 import { composeProviders } from "../shared/utils/lib/compose-providers";
 
-const App = () => <div>App</div>;
+type Props = {
+  pleloadState?: typeof window.__PRELOAD_STATE__;
+};
+
+const App: FC<Props> = (props) => {
+  console.log(props);
+
+  return <div>App</div>;
+};
 
 const AppWithProviders = composeProviders()(App);
 

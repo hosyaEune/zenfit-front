@@ -7,6 +7,6 @@ import { App } from "./app";
 hydrateRoot(
   document.getElementById("root") as HTMLElement,
   <StrictMode>
-    <App />
+    <App pleloadState={window?.__PRELOAD_STATE__ ?? {}} />
   </StrictMode>
 );

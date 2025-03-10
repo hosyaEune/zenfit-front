@@ -11,7 +11,7 @@ import reactPlugin from "eslint-plugin-react";
 import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
 
 export default tseslint.config(
-  { ignores: ["dist", "*.d.ts", "*.config.js", "vite.config.ts"] },
+  { ignores: ["dist", "**/*.d.ts", "*.config.js", "vite.config.ts"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],

@@ -1,14 +1,15 @@
-import { ComponentType } from "react";
+import { FC, JSX } from "react";
 
 import { Provider } from "./types";
 
-export function composeProviders(...providers: Provider[]) {
-  return function (WrappedComponent: ComponentType) {
-    const ComposedComponent: React.FC = (props) => providers.reduceRight(
+export const composeProviders =
+  (...providers: Provider[]) =>
+  <T,>(WrappedComponent: FC<T & JSX.IntrinsicAttributes>) => {
+    const ComposedComponent: FC<T & JSX.IntrinsicAttributes> = (props) =>
+      providers.reduceRight(
         (children, Provider) => <Provider>{children}</Provider>,
         <WrappedComponent {...props} />
       );
 
     return ComposedComponent;
   };
-}

@@ -8,10 +8,19 @@ import {
 import { App } from "./app";
 
 export function render(_url: string, options?: RenderToPipeableStreamOptions) {
+  const preloadState: typeof window.__PRELOAD_STATE__ = {
+    hello: "world",
+  };
+
   return renderToPipeableStream(
     <StrictMode>
       <App />
     </StrictMode>,
-    options
+    {
+      ...options,
+      bootstrapScriptContent: `window.__PRELOAD_STATE__ = ${JSON.stringify(
+        preloadState
+      )}`,
+    }
   );
 }

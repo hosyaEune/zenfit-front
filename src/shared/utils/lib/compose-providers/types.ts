@@ -1,3 +1,3 @@
-import { ComponentType, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
-export type Provider = ComponentType<{ children: ReactNode }>;
+export type Provider = FC<{ children: ReactNode }>;
