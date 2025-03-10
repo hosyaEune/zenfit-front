@@ -78,6 +78,10 @@ export default tseslint.config(
         "error",
         { argsIgnorePattern: "^_" },
       ],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        { prefer: "type-imports", disallowTypeAnnotations: false },
+      ],
       "react/prop-types": "off",
     },
   }

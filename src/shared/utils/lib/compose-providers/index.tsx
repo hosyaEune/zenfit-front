@@ -1,6 +1,6 @@
-import { FC, JSX } from "react";
+import type { FC, JSX } from "react";
 
-import { Provider } from "./types";
+import type { Provider } from "./types";
 
 export const composeProviders =
   (...providers: Provider[]) =>

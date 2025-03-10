@@ -1,5 +1,3 @@
-import { StrictMode } from "react";
-
 import {
   renderToPipeableStream,
   type RenderToPipeableStreamOptions,
@@ -12,15 +10,10 @@ export function render(_url: string, options?: RenderToPipeableStreamOptions) {
     hello: "world",
   };
 
-  return renderToPipeableStream(
-    <StrictMode>
-      <App />
-    </StrictMode>,
-    {
-      ...options,
-      bootstrapScriptContent: `window.__PRELOAD_STATE__ = ${JSON.stringify(
-        preloadState
-      )}`,
-    }
-  );
+  return renderToPipeableStream(<App />, {
+    ...options,
+    bootstrapScriptContent: `window.__PRELOAD_STATE__ = ${JSON.stringify(
+      preloadState
+    )}`,
+  });
 }
