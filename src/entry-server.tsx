@@ -1,8 +1,10 @@
 import { StrictMode } from "react";
+
 import {
-  type RenderToPipeableStreamOptions,
   renderToPipeableStream,
+  type RenderToPipeableStreamOptions,
 } from "react-dom/server";
+
 import { App } from "./app";
 
 export function render(_url: string, options?: RenderToPipeableStreamOptions) {

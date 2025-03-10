@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import { type UseQueryArgs, type UseQueryResult } from "./types";
 // Глобальный кэш с типизацией
-const queryCache = new Map<string, any>(); // Можно заменить `any` на более строгий тип, если нужно
+const queryCache = new Map<string, unknown>(); // Можно заменить `any` на более строгий тип, если нужно
 
 // Основной хук с дженериком для типа данных
 export const useQuery = <T>({
@@ -16,7 +17,7 @@ export const useQuery = <T>({
   const cacheKey = Array.isArray(queryKey) ? queryKey.join("-") : queryKey;
 
   // Функция для выполнения запроса
-  const fetchData = async (): Promise<void> => {
+  const fetchData = useCallback(async (): Promise<void> => {
     setIsLoading(true);
     try {
       const result = await queryFn();
@@ -28,7 +29,7 @@ export const useQuery = <T>({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [cacheKey, queryFn]);
 
   // Эффект для первоначальной загрузки или использования кэша
   useEffect(() => {
@@ -38,7 +39,7 @@ export const useQuery = <T>({
     } else {
       fetchData();
     }
-  }, [cacheKey]); // Зависимость — только cacheKey
+  }, [cacheKey, fetchData]); // Зависимость — только cacheKey
 
   return { data, isLoading, error, refetch: fetchData };
 };
