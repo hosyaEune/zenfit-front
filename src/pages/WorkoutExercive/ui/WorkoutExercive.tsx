@@ -9,8 +9,15 @@ import {
   Span,
   Text,
 } from "@chakra-ui/react";
-import { AiFillSound, AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
+import {
+  AiFillCaretRight,
+  AiFillSound,
+  AiOutlineCheck,
+  AiOutlineClose,
+  AiOutlinePause,
+} from "react-icons/ai";
 
+import { REST_ID } from "@/@mock";
 import type { Workout } from "@/@model";
 import { PageWithPadding } from "@/app";
 import { TimeHelper } from "@/shared/utils/helpers/time-helper";
@@ -50,8 +57,9 @@ const Header: FC<Props> = ({ currentExercise, countExercises, onCancel }) => (
 
 const Timer: FC<{
   count: number;
-  onComplete?: () => number;
-}> = ({ count, onComplete }) => {
+  stop?: boolean;
+  onComplete?: () => void;
+}> = ({ count, stop = false, onComplete }) => {
   const [remaining, setRemaining] = useState(count);
   const [isRunning, setIsRunning] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -59,7 +67,9 @@ const Timer: FC<{
   useEffect(() => {
     if (isRunning && remaining > 0) {
       intervalRef.current = setInterval(() => {
-        setRemaining((prev) => prev - 1);
+        if (!stop) {
+          setRemaining((prev) => prev - 1);
+        }
       }, 1000);
     }
 
@@ -71,7 +81,7 @@ const Timer: FC<{
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isRunning, remaining, onComplete]);
+  }, [isRunning, remaining, onComplete, stop]);
 
   return (
     <Text color="black" fontSize="5xl">
@@ -79,10 +89,74 @@ const Timer: FC<{
     </Text>
   );
 };
+
+const DoneButton: FC<Props> = ({ type, count, onDone, exercise }) => {
+  const [isReady, setIsReady] = useState(type === "reps");
+  const [isPause, setIsPause] = useState(
+    type === "time" && exercise.id !== REST_ID
+  );
+
+  return (
+    <>
+      <Box>
+        {type === "reps" ? (
+          <Text color="black" fontSize="5xl">
+            X{count}
+          </Text>
+        ) : (
+          <Timer
+            count={count}
+            stop={isPause}
+            onComplete={async () => {
+              if (navigator.vibrate) {
+                navigator.vibrate([300, 150, 300]); // вибрация 200мс, пауза 100мс, вибрация 200мс
+              }
+
+              setIsReady(true);
+            }}
+          />
+        )}
+      </Box>
+      <Box width="100%">
+        {isReady ? (
+          <Button
+            background="blue.600"
+            size="xl"
+            rounded="full"
+            width="100%"
+            onClick={onDone}
+          >
+            <AiOutlineCheck color="white" size={6} />
+            <Span color="white" textTransform="capitalize">
+              done
+            </Span>
+          </Button>
+        ) : (
+          <Button
+            background="blue.600"
+            size="xl"
+            rounded="full"
+            width="100%"
+            onClick={() => setIsPause((prev) => !prev)}
+          >
+            {isPause ? (
+              <AiFillCaretRight color="white" size={6} />
+            ) : (
+              <AiOutlinePause color="white" size={6} />
+            )}
+            <Span color="white" textTransform="capitalize">
+              {isPause ? "Start" : "Pause"}
+            </Span>
+          </Button>
+        )}
+      </Box>
+    </>
+  );
+};
+
 // TODO: опечатка
 export default function WorkoutExercive(props: Props) {
   const {
-    count,
     exercise: { image, name },
     currentExercise,
     countExercises,
@@ -90,8 +164,6 @@ export default function WorkoutExercive(props: Props) {
     onFinish,
     onSkip,
     onPrev,
-    onDone,
-    type,
   } = props;
 
   const isFirstExercive = currentExercise === 0;
@@ -128,29 +200,7 @@ export default function WorkoutExercive(props: Props) {
               {name}
             </Text>
           </Box>
-          <Box key={currentExercise}>
-            {type === "reps" ? (
-              <Text color="black" fontSize="5xl">
-                X{count}
-              </Text>
-            ) : (
-              <Timer count={count} />
-            )}
-          </Box>
-          <Box width="100%">
-            <Button
-              background="blue.600"
-              size="xl"
-              rounded="full"
-              width="100%"
-              onClick={onDone}
-            >
-              <Span color="white" textTransform="capitalize">
-                done
-              </Span>
-              <AiOutlineCheck color="white" />
-            </Button>
-          </Box>
+          <DoneButton {...props} key={currentExercise} />
           <Flex gap={4} width="100%">
             <Button
               flex={1}

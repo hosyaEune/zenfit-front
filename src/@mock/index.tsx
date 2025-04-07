@@ -1,5 +1,7 @@
 import { type Workout, WorkoutDifficulty } from "@/@model";
 
+export const REST_ID = 0;
+
 const ExercisesMap = {
   приседания: {
     id: 2,
@@ -269,7 +271,7 @@ export const ITEMS: Workout[] = [
         exercises: [
           {
             exercise: ExercisesMap["разведение гантелей лёжа"],
-            count: 10,
+            count: 8,
             type: "reps",
           },
         ],
@@ -347,12 +349,34 @@ export const ITEMS: Workout[] = [
         ],
       },
       {
-        repeatCount: 3,
+        repeatCount: 1,
         restSeconds: 60,
         exercises: [
           {
             exercise: ExercisesMap["беговая дорожка"],
             count: 900,
+            type: "time",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Test",
+    difficulty: WorkoutDifficulty.Beginner,
+    averageDurationSeconds: 3000,
+    image: {
+      src: "/stock-row.png",
+    },
+    sets: [
+      {
+        repeatCount: 4,
+        restSeconds: 90,
+        exercises: [
+          {
+            exercise: ExercisesMap["выпады"],
+            count: 5,
             type: "time",
           },
         ],

@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Text } from "@chakra-ui/react";
 import { useParams } from "wouter";
 
-import { ITEMS } from "@/@mock";
+import { ITEMS, REST_ID } from "@/@mock";
 import type { Workout } from "@/@model";
 import { WorkoutCogratulations } from "@/pages/WorkoutCogratulations";
 import { WorkoutExercive } from "@/pages/WorkoutExercive";
@@ -11,7 +11,6 @@ import { WorkoutPreview } from "@/pages/WorkoutPreview";
 import { TimeHelper } from "@/shared/utils/helpers/time-helper";
 import { useQuery } from "@/shared/utils/hooks/use-query";
 
-const REST_ID = 0;
 const previewIndex = -1;
 
 export default function Workout() {
