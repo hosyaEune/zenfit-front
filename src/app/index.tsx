@@ -39,33 +39,36 @@ const App: FC<Props> = () => {
       throw new Error("Уведомления запрещены");
     }
   }
+  // не выключить скрин
+  navigator.wakeLock.request("screen");
 
   requestPermission()
     .then(() => {
       alert("получил разрешение");
+      setTimeout(notifyUser, 5000);
     })
     .catch(() => {
       alert("получил отказ");
     });
 
   // Функция для показа уведомления
-  // async function notifyUser() {
-  //   await requestPermission();
+  async function notifyUser() {
+    await requestPermission();
 
-  //   const registration = await navigator.serviceWorker.getRegistration();
-  //   if (!registration) {
-  //     alert("Сервис-воркер не найден");
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (!registration) {
+      alert("Сервис-воркер не найден");
 
-  //     return;
-  //   }
+      return;
+    }
 
-  //   registration.showNotification("Привет из PWA!", {
-  //     body: "Это локальное уведомление",
-  //     icon: "/icon-192x192.png",
-  //     badge: "/badge-icon.png",
-  //     tag: "pwa-notify-demo",
-  //   });
-  // }
+    registration.showNotification("Привет из PWA!", {
+      body: "Это локальное уведомление",
+      icon: "/icon-192x192.png",
+      badge: "/badge-icon.png",
+      tag: "pwa-notify-demo",
+    });
+  }
 
   return (
     <Flex
