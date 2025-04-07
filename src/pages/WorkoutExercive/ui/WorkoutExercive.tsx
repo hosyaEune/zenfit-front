@@ -18,13 +18,16 @@ import { TimeHelper } from "@/shared/utils/helpers/time-helper";
 type Props = {
   countExercises: number;
   currentExercise: number;
-  onNext: () => void;
+  onSkip: () => void;
   onPrev: () => void;
+  onFinish: () => void;
+  onCancel: () => void;
+  onDone: () => void;
 } & Workout["sets"][number]["exercises"][number];
 
-const Header: FC<Props> = ({ currentExercise, countExercises }) => (
+const Header: FC<Props> = ({ currentExercise, countExercises, onCancel }) => (
   <Flex height="40px" flex={1} alignItems="center">
-    <Button>
+    <Button onClick={onCancel}>
       <AiOutlineClose />
     </Button>
     <Box flex={1}>
@@ -83,8 +86,11 @@ export default function WorkoutExercive(props: Props) {
     exercise: { image, name },
     currentExercise,
     countExercises,
-    onNext,
+    onCancel,
+    onFinish,
+    onSkip,
     onPrev,
+    onDone,
     type,
   } = props;
 
@@ -132,7 +138,13 @@ export default function WorkoutExercive(props: Props) {
             )}
           </Box>
           <Box width="100%">
-            <Button background="blue.600" size="xl" rounded="full" width="100%">
+            <Button
+              background="blue.600"
+              size="xl"
+              rounded="full"
+              width="100%"
+              onClick={onDone}
+            >
               <Span color="white" textTransform="capitalize">
                 done
               </Span>
@@ -145,7 +157,7 @@ export default function WorkoutExercive(props: Props) {
               background="blue.100"
               size="xl"
               rounded="full"
-              onClick={onPrev}
+              onClick={isFirstExercive ? onCancel : onPrev}
             >
               <Span textTransform="capitalize" color="blue.600">
                 {isFirstExercive ? "cancel" : "prev"}
@@ -156,7 +168,7 @@ export default function WorkoutExercive(props: Props) {
               background="blue.600"
               size="xl"
               rounded="full"
-              onClick={onNext}
+              onClick={isLastExercive ? onFinish : onSkip}
             >
               <Span textTransform="capitalize" color="white">
                 {isLastExercive ? "finish" : "skip"}
