@@ -57,7 +57,7 @@ export default function Workout() {
 
     return acc;
   }, 0);
-
+  console.log("zdec");
   if (!data) {
     return <Text>Loading...</Text>;
   }
