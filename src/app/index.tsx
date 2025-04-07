@@ -6,6 +6,7 @@ import { Route } from "wouter";
 import { composeProviders } from "../shared/utils/lib/compose-providers";
 import { ChakraProvider } from "./providers";
 
+import { App as AppSettings } from "@/@singleton/App";
 import { Home } from "@/pages/Home";
 import { Workout } from "@/proccesses/Workout";
 
@@ -30,45 +31,8 @@ export const PageWithPadding: FC<{ children: ReactNode } & FlexProps> = ({
 );
 
 const App: FC<Props> = () => {
-  // Проверка поддержки и запроса разрешения
-  async function requestPermission() {
-    const result = await Notification.requestPermission();
-
-    if (result !== "granted") {
-      alert("Разрешение на уведомления не получено");
-      throw new Error("Уведомления запрещены");
-    }
-  }
-  // не выключить скрин
-  navigator.wakeLock.request("screen");
-
-  requestPermission()
-    .then(() => {
-      alert("получил разрешение");
-      setTimeout(notifyUser, 5000);
-    })
-    .catch(() => {
-      alert("получил отказ");
-    });
-
-  // Функция для показа уведомления
-  async function notifyUser() {
-    await requestPermission();
-
-    const registration = await navigator.serviceWorker.getRegistration();
-    if (!registration) {
-      alert("Сервис-воркер не найден");
-
-      return;
-    }
-
-    registration.showNotification("Привет из PWA!", {
-      body: "Это локальное уведомление",
-      icon: "/icon-192x192.png",
-      badge: "/badge-icon.png",
-      tag: "pwa-notify-demo",
-    });
-  }
+  AppSettings.getInstance().requestNoSleep();
+  AppSettings.getInstance().requestPermissions();
 
   return (
     <Flex

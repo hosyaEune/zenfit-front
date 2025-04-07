@@ -19,6 +19,7 @@ import {
 
 import { REST_ID } from "@/@mock";
 import type { Workout } from "@/@model";
+import { App } from "@/@singleton/App";
 import { PageWithPadding } from "@/app";
 import { TimeHelper } from "@/shared/utils/helpers/time-helper";
 
@@ -108,9 +109,8 @@ const DoneButton: FC<Props> = ({ type, count, onDone, exercise }) => {
             count={count}
             stop={isPause}
             onComplete={async () => {
-              if (navigator.vibrate) {
-                navigator.vibrate([300, 150, 300]); // вибрация 200мс, пауза 100мс, вибрация 200мс
-              }
+              App.getInstance().pushNotify("Время вышло");
+              App.getInstance().vibrate();
 
               setIsReady(true);
             }}
