@@ -1,0 +1,204 @@
+import { type Workout, WorkoutDifficulty } from "@/@model";
+
+const ExercisesMap = {
+  приседания: {
+    id: 2,
+    name: "приседания",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "становая тяга": {
+    id: 3,
+    name: "становая тяга",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "тяга в наклоне": {
+    id: 4,
+    name: "тяга в наклоне",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  выпады: {
+    id: 5,
+    name: "выпады",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  гиперэкстензия: {
+    id: 6,
+    name: "гиперэкстензия",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "подъемы таза (левая нога)": {
+    id: 7,
+    name: "подъемы таза (левая нога)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "подъемы таза (правая нога)": {
+    id: 8,
+    name: "подъемы таза (правая нога)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  скручивания: {
+    id: 9,
+    name: "скручивания",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "косые скручивания": {
+    id: 10,
+    name: "косые скручивания",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "подъем на носке (левая нога)": {
+    id: 11,
+    name: "подъем на носке (левая нога)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "подъем на носке (правая нога)": {
+    id: 12,
+    name: "подъем на носке (правая нога)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "подъем на носке (обе ноги)": {
+    id: 13,
+    name: "подъем на носке (обе ноги)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+} as const;
+
+export const ITEMS: Workout[] = [
+  {
+    id: 1,
+    name: "Full body A",
+    difficulty: WorkoutDifficulty.Beginner,
+    averageDurationSeconds: 3000,
+    image: {
+      src: "/stock-row.png",
+    },
+    sets: [
+      {
+        repeatCount: 4,
+        restSeconds: 110,
+        exercises: [
+          {
+            exercise: ExercisesMap["становая тяга"],
+            count: 7,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 4,
+        restSeconds: 110,
+        exercises: [
+          {
+            exercise: ExercisesMap["приседания"],
+            count: 10,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 90,
+        exercises: [
+          {
+            exercise: ExercisesMap["тяга в наклоне"],
+            count: 10,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 52,
+        exercises: [
+          {
+            exercise: ExercisesMap["подъемы таза (левая нога)"],
+            count: 13,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["подъемы таза (правая нога)"],
+            count: 13,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 60,
+        exercises: [
+          {
+            exercise: ExercisesMap["косые скручивания"],
+            count: 20,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 60,
+        exercises: [
+          {
+            exercise: ExercisesMap["подъем на носке (левая нога)"],
+            count: 20,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["подъем на носке (правая нога)"],
+            count: 20,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["подъем на носке (обе ноги)"],
+            count: 20,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 60,
+        exercises: [
+          {
+            exercise: ExercisesMap["гиперэкстензия"],
+            count: 12,
+            type: "reps",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Full body B",
+    difficulty: WorkoutDifficulty.Beginner,
+    averageDurationSeconds: 3000,
+    image: {
+      src: "/stock-row.png",
+    },
+    sets: [],
+  },
+];

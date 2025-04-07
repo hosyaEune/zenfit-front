@@ -1,6 +1,7 @@
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { defineConfig } from "vite";
+import { VitePWA } from "vite-plugin-pwa";
 // eslint-disable-next-line  @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import eslint from "vite-plugin-eslint";
@@ -11,6 +12,40 @@ export default defineConfig({
     react(),
     eslint({
       include: ["**/*.{js,jsx,ts,tsx}"], // Проверяемые файлы
+    }),
+    VitePWA({
+      registerType: "autoUpdate",
+      base: "/",
+      devOptions: {
+        enabled: true,
+        type: "module",
+      },
+      srcDir: "src",
+      filename: "sw.ts",
+      workbox: {
+        swDest: "client/sw.js",
+      },
+      strategies: "injectManifest",
+      manifest: {
+        name: "zenFit",
+        short_name: "zenFit",
+        icons: [
+          {
+            src: "/assets/icon-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/assets/icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+        theme_color: "#ffffff",
+        background_color: "#ffffff",
+        start_url: "/",
+        display: "standalone",
+      },
     }),
   ],
   resolve: {
