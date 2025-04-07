@@ -57,7 +57,7 @@ export default function Workout() {
 
     return acc;
   }, 0);
-  console.log("zdec");
+
   if (!data) {
     return <Text>Loading...</Text>;
   }
@@ -93,6 +93,10 @@ export default function Workout() {
   };
 
   const onPrevHandler = () => {
+    if (allExercise[currentExerciseIndex].exercise.id !== REST_ID) {
+      skipCount.current -= 1;
+    }
+
     setCurrentExerciseIndex((prev) => prev - 1);
   };
 

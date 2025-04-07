@@ -128,7 +128,7 @@ export default function WorkoutExercive(props: Props) {
               {name}
             </Text>
           </Box>
-          <Box>
+          <Box key={currentExercise}>
             {type === "reps" ? (
               <Text color="black" fontSize="5xl">
                 X{count}
