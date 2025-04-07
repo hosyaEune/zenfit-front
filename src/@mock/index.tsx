@@ -85,6 +85,69 @@ const ExercisesMap = {
       src: "/stock-cell.png",
     },
   },
+  "разведение гантелей лёжа": {
+    id: 14,
+    name: "разведение гантелей лёжа",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "разгибение за спиной (левая рука)": {
+    id: 15,
+    name: "разгибение за спиной (левая рука)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "разгибение за спиной (правая рука)": {
+    id: 16,
+    name: "разгибение за спиной (правая рука)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "сгибание на бицепс с гантелей (левая рука)": {
+    id: 17,
+    name: "сгибание на бицепс (левая рука)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "сгибание на бицепс с гантелей (правая рука)": {
+    id: 18,
+    name: "сгибание на бицепс (правая рука)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "выпады назад (на каждую ногу)": {
+    id: 19,
+    name: "выпады назад",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "сгибание кисти с гантелей (левая рука)": {
+    id: 20,
+    name: "сгибание кисти с гантелей (левая рука)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "сгибание кисти с гантелей (правая рука)": {
+    id: 21,
+    name: "сгибание кисти с гантелей (правая рука)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "беговая дорожка": {
+    id: 22,
+    name: "беговая дорожка",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
 } as const;
 
 export const ITEMS: Workout[] = [
@@ -199,6 +262,101 @@ export const ITEMS: Workout[] = [
     image: {
       src: "/stock-row.png",
     },
-    sets: [],
+    sets: [
+      {
+        repeatCount: 4,
+        restSeconds: 90,
+        exercises: [
+          {
+            exercise: ExercisesMap["разведение гантелей лёжа"],
+            count: 10,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 60,
+        exercises: [
+          {
+            exercise: ExercisesMap["разгибение за спиной (левая рука)"],
+            count: 6,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["разгибение за спиной (правая рука)"],
+            count: 6,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 60,
+        exercises: [
+          {
+            exercise:
+              ExercisesMap["сгибание на бицепс с гантелей (левая рука)"],
+            count: 6,
+            type: "reps",
+          },
+          {
+            exercise:
+              ExercisesMap["сгибание на бицепс с гантелей (правая рука)"],
+            count: 6,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 90,
+        exercises: [
+          {
+            exercise: ExercisesMap["выпады назад (на каждую ногу)"],
+            count: 10,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 60,
+        exercises: [
+          {
+            exercise: ExercisesMap["скручивания"],
+            count: 20,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 60,
+        exercises: [
+          {
+            exercise: ExercisesMap["сгибание кисти с гантелей (левая рука)"],
+            count: 10,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["сгибание кисти с гантелей (правая рука)"],
+            count: 10,
+            type: "reps",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 60,
+        exercises: [
+          {
+            exercise: ExercisesMap["беговая дорожка"],
+            count: 900,
+            type: "time",
+          },
+        ],
+      },
+    ],
   },
 ];
