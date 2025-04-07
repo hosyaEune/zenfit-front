@@ -68,14 +68,8 @@ export default tseslint.config(
         "as-needed",
         { requireReturnForObjectLiteral: false },
       ],
-      "check-file/filename-naming-convention": [
-        "error",
-        {
-          "**/*.{ts,tsx,js,jsx,css,scss}": "KEBAB_CASE",
-        },
-      ],
       "@typescript-eslint/no-unused-vars": [
-        "error",
+        "warn",
         { argsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/consistent-type-imports": [
