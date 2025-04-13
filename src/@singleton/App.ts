@@ -11,11 +11,21 @@ abstract class Settings {
     this._execute(...args);
   }
 
+  abstract name: string;
   abstract getPermission(): Promise<unknown>;
   protected abstract _execute(...args: unknown[]): Promise<void>;
+
+  toJSON() {
+    return {
+      name: this.name,
+      isEnabled: this.isEnabled,
+    };
+  }
 }
 
 class Vibrate extends Settings {
+  name = "vibrate";
+
   protected async _execute() {
     if (navigator.vibrate) {
       navigator.vibrate([300, 150, 300]); // вибрация 200мс, пауза 100мс, вибрация 200мс
@@ -26,6 +36,8 @@ class Vibrate extends Settings {
   }
 }
 class PushNotification extends Settings {
+  name = "pushNotification";
+
   title: string;
 
   constructor(title: string) {
@@ -57,13 +69,14 @@ class PushNotification extends Settings {
 
 export class App {
   appName = "zenFit";
-  vibrate: Vibrate;
-  pushNotification: PushNotification;
+
+  settings: Record<string, Settings> = {};
+
   private static instance: App;
 
   constructor() {
-    this.vibrate = new Vibrate();
-    this.pushNotification = new PushNotification(this.appName);
+    this.settings.vibrate = new Vibrate();
+    this.settings.pushNotification = new PushNotification(this.appName);
   }
 
   public static getInstance(): App {
@@ -79,10 +92,9 @@ export class App {
   public async requestPermissions() {
     if (typeof window === "undefined") return;
 
-    const permissions: Promise<unknown>[] = [
-      this.pushNotification.getPermission(),
-      this.vibrate.getPermission(),
-    ];
+    const permissions: Promise<unknown>[] = Object.values(this.settings).map(
+      (settings) => settings.getPermission()
+    );
 
     return Promise.all(permissions);
   }
@@ -91,5 +103,28 @@ export class App {
     if (navigator.wakeLock) {
       navigator.wakeLock.request("screen");
     }
+  }
+
+  public saveSettigns() {
+    if (typeof window === "undefined") return;
+
+    localStorage.setItem(
+      "settings",
+      JSON.stringify(Object.values(this.settings))
+    );
+  }
+
+  public restoreSettings() {
+    if (typeof window === "undefined") return;
+
+    const settings = JSON.parse(localStorage.getItem("settings") || "[]") as [
+      Settings
+    ];
+
+    settings.forEach((s) => {
+      if (this.settings[s.name]) {
+        this.settings[s.name].isEnabled = s.isEnabled;
+      }
+    });
   }
 }

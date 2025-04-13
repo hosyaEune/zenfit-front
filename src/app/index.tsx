@@ -121,6 +121,7 @@ export const PageWithNavigation: FC<{
 };
 
 const App: FC<Props> = () => {
+  AppSettings.getInstance().restoreSettings();
   AppSettings.getInstance().requestNoSleep();
   AppSettings.getInstance().requestPermissions();
 

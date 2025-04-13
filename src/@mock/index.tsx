@@ -150,11 +150,84 @@ export const ExercisesMap = {
       src: "/stock-cell.png",
     },
   },
+  планка: {
+    id: 23,
+    name: "планка",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "охотничья собака (левая рука)": {
+    id: 24,
+    name: "охотничья собака (левая рука)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
+  "охотничья собака (правая рука)": {
+    id: 25,
+    name: "охотничья собака (правая рука)",
+    image: {
+      src: "/stock-cell.png",
+    },
+  },
 } as const;
 
 export const ITEMS: Workout[] = [
   {
     id: 1,
+    name: "light",
+    difficulty: WorkoutDifficulty.Beginner,
+    averageDurationSeconds: 900,
+    image: {
+      src: "/stock-row.png",
+    },
+    sets: [
+      {
+        repeatCount: 2,
+        restSeconds: 90,
+        exercises: [
+          {
+            exercise: ExercisesMap["охотничья собака (левая рука)"],
+            count: 6,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["охотничья собака (правая рука)"],
+            count: 6,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["скручивания"],
+            count: 15,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["подъемы таза (левая нога)"],
+            count: 6,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["подъемы таза (правая нога)"],
+            count: 6,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["планка"],
+            count: 20,
+            type: "time",
+          },
+          {
+            exercise: ExercisesMap["подъем на носке (обе ноги)"],
+            count: 15,
+            type: "reps",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
     name: "Full body A",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3000,
@@ -257,7 +330,7 @@ export const ITEMS: Workout[] = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     name: "Full body B",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3000,
@@ -355,28 +428,6 @@ export const ITEMS: Workout[] = [
           {
             exercise: ExercisesMap["беговая дорожка"],
             count: 900,
-            type: "time",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Test",
-    difficulty: WorkoutDifficulty.Beginner,
-    averageDurationSeconds: 3000,
-    image: {
-      src: "/stock-row.png",
-    },
-    sets: [
-      {
-        repeatCount: 4,
-        restSeconds: 90,
-        exercises: [
-          {
-            exercise: ExercisesMap["выпады"],
-            count: 5,
             type: "time",
           },
         ],

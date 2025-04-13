@@ -46,16 +46,18 @@ type SOUND_SETTING_ITEM_PROPS = {
 };
 const cacheValues = {
   vibration: {
-    value: App.getInstance().vibrate.isEnabled,
+    value: App.getInstance().settings.vibrate.isEnabled,
     onChange: (isChecked: boolean) =>
-      App.getInstance().vibrate.onChange(isChecked),
+      App.getInstance().settings.vibrate.onChange(isChecked),
   },
   push: {
-    value: App.getInstance().pushNotification.isEnabled,
+    value: App.getInstance().settings.pushNotification.isEnabled,
     onChange: (isChecked: boolean) => {
       App.getInstance()
-        .pushNotification.getPermission()
-        .then(() => App.getInstance().pushNotification.onChange(isChecked));
+        .settings.pushNotification.getPermission()
+        .then(() =>
+          App.getInstance().settings.pushNotification.onChange(isChecked)
+        );
     },
   },
 };
@@ -64,7 +66,7 @@ const SOUND_SETTING_ITEMS: SOUND_SETTING_ITEM_PROPS[] = [
   {
     name: "vibration",
     title: "enable vibration",
-    getIsChecked: () => App.getInstance().vibrate.isEnabled,
+    getIsChecked: () => App.getInstance().settings.vibrate.isEnabled,
     icon: <MdVibration size={20} />,
     onChange: (isChecked: boolean) =>
       (cacheValues["vibration"].value = isChecked),
@@ -72,7 +74,7 @@ const SOUND_SETTING_ITEMS: SOUND_SETTING_ITEM_PROPS[] = [
   {
     name: "push",
     title: "enable push notification",
-    getIsChecked: () => App.getInstance().pushNotification.isEnabled,
+    getIsChecked: () => App.getInstance().settings.pushNotification.isEnabled,
     icon: <MdOutlineNotifications size={20} />,
     onChange: (isChecked: boolean) => (cacheValues["push"].value = isChecked),
   },
@@ -154,7 +156,6 @@ const ButtonSoundController: FC = () => {
           </Button>
         </Flex>
       ),
-      // onCloseCb?: () => void;
       modalProps: {
         title: (
           <Text textAlign="center" w="100%" textTransform="capitalize">
@@ -167,6 +168,8 @@ const ButtonSoundController: FC = () => {
         Object.values(cacheValues).forEach(({ value, onChange }) => {
           onChange(value);
         });
+
+        App.getInstance().saveSettigns();
 
         console.log("zdec ok");
         console.log(App.getInstance());
@@ -259,8 +262,10 @@ const DoneButton: FC<Props> = ({ type, count, onDone, exercise }) => {
             count={count}
             stop={isPause}
             onComplete={async () => {
-              App.getInstance().pushNotification.execute("Время вышло");
-              App.getInstance().vibrate.execute();
+              App.getInstance().settings.pushNotification.execute(
+                "Время вышло"
+              );
+              App.getInstance().settings.vibrate.execute();
 
               setIsReady(true);
             }}
