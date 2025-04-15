@@ -3,347 +3,137 @@ import { type Workout, WorkoutDifficulty } from "@/@model";
 export const REST_ID = 0;
 
 export const ExercisesMap = {
-  приседания: {
+  // Full Body A
+  "Romanian Deadlift": {
+    id: 1,
+    name: "Romanian Deadlift",
+    image: { src: "/Romanian_Deadlift.png" },
+  },
+  "Bodyweight Squat": {
     id: 2,
-    name: "приседания",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Bodyweight Squat",
+    image: { src: "/stock-cell.png" },
   },
-  "становая тяга": {
+  "Bent-over Row": {
     id: 3,
-    name: "становая тяга",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Bent-over Row",
+    image: { src: "/Bent-over_Row.png" },
   },
-  "тяга в наклоне": {
+  "Glute Bridge (Left)": {
     id: 4,
-    name: "тяга в наклоне",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Glute Bridge (Left)",
+    image: { src: "/Glute_Bridge.png" },
   },
-  выпады: {
+  "Glute Bridge (Right)": {
     id: 5,
-    name: "выпады",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Glute Bridge (Right)",
+    image: { src: "/Glute_Bridge.png" },
   },
-  гиперэкстензия: {
+  "Oblique Crunch": {
     id: 6,
-    name: "гиперэкстензия",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Oblique Crunch",
+    image: { src: "/Oblique_Crunch.png" },
   },
-  "подъемы таза (левая нога)": {
+  "Calf Raise (Left)": {
     id: 7,
-    name: "подъемы таза (левая нога)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Calf Raise (Left)",
+    image: { src: "/Calf_Raise.png" },
   },
-  "подъемы таза (правая нога)": {
+  "Calf Raise (Right)": {
     id: 8,
-    name: "подъемы таза (правая нога)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Calf Raise (Right)",
+    image: { src: "/Calf_Raise.png" },
   },
-  скручивания: {
+  "Calf Raise (Both)": {
     id: 9,
-    name: "скручивания",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Calf Raise (Both)",
+    image: { src: "/Calf_Raise.png" },
   },
-  "косые скручивания": {
+  "Back Extension": {
     id: 10,
-    name: "косые скручивания",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Back Extension",
+    image: { src: "/stock-cell.png" },
   },
-  "подъем на носке (левая нога)": {
+
+  // Full Body B
+  "Chest Fly (Dumbbell)": {
     id: 11,
-    name: "подъем на носке (левая нога)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Chest Fly (Dumbbell)",
+    image: { src: "/stock-cell.png" },
   },
-  "подъем на носке (правая нога)": {
+  "Dumbbell One Arm Triceps Extension (L)": {
     id: 12,
-    name: "подъем на носке (правая нога)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Dumbbell One Arm Triceps Extension (L)",
+    image: { src: "/stock-cell.png" },
   },
-  "подъем на носке (обе ноги)": {
+  "Dumbbell One Arm Triceps Extension (R)": {
     id: 13,
-    name: "подъем на носке (обе ноги)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Dumbbell One Arm Triceps Extension (R)",
+    image: { src: "/stock-cell.png" },
   },
-  "разведение гантелей лёжа": {
+  "Bicep Curl (L)": {
     id: 14,
-    name: "разведение гантелей лёжа",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Bicep Curl (L)",
+    image: { src: "/stock-cell.png" },
   },
-  "разгибение за спиной (левая рука)": {
+  "Bicep Curl (R)": {
     id: 15,
-    name: "разгибение за спиной (левая рука)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Bicep Curl (R)",
+    image: { src: "/stock-cell.png" },
   },
-  "разгибение за спиной (правая рука)": {
+  "Rear Lunge": {
     id: 16,
-    name: "разгибение за спиной (правая рука)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Rear Lunge",
+    image: { src: "/stock-cell.png" },
   },
-  "сгибание на бицепс с гантелей (левая рука)": {
-    id: 17,
-    name: "сгибание на бицепс (левая рука)",
-    image: {
-      src: "/stock-cell.png",
-    },
-  },
-  "сгибание на бицепс с гантелей (правая рука)": {
+  Crunch: { id: 17, name: "Crunch", image: { src: "/stock-cell.png" } },
+  "Wrist Curl (L)": {
     id: 18,
-    name: "сгибание на бицепс (правая рука)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Wrist Curl (L)",
+    image: { src: "/stock-cell.png" },
   },
-  "выпады назад (на каждую ногу)": {
+  "Wrist Curl (R)": {
     id: 19,
-    name: "выпады назад",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Wrist Curl (R)",
+    image: { src: "/stock-cell.png" },
   },
-  "сгибание кисти с гантелей (левая рука)": {
+  "Treadmill Walk": {
     id: 20,
-    name: "сгибание кисти с гантелей (левая рука)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Treadmill Walk",
+    image: { src: "/stock-cell.png" },
   },
-  "сгибание кисти с гантелей (правая рука)": {
-    id: 21,
-    name: "сгибание кисти с гантелей (правая рука)",
-    image: {
-      src: "/stock-cell.png",
-    },
-  },
-  "беговая дорожка": {
-    id: 22,
-    name: "беговая дорожка",
-    image: {
-      src: "/stock-cell.png",
-    },
-  },
-  планка: {
-    id: 23,
-    name: "планка",
-    image: {
-      src: "/stock-cell.png",
-    },
-  },
-  "охотничья собака (левая рука)": {
+
+  // Light Day (Core & Mobility)
+  "Cat Cow": { id: 21, name: "Cat Cow", image: { src: "/Cat_Cow.png" } },
+  "Bird Dog": { id: 22, name: "Bird Dog", image: { src: "/Bird_Dog.png" } },
+  "Dead Bug": { id: 23, name: "Dead Bug", image: { src: "/stock-cell.png" } },
+  "Side Plank (L)": {
     id: 24,
-    name: "охотничья собака (левая рука)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Side Plank (L)",
+    image: { src: "/Side_Plank.png" },
   },
-  "охотничья собака (правая рука)": {
+  "Side Plank (R)": {
     id: 25,
-    name: "охотничья собака (правая рука)",
-    image: {
-      src: "/stock-cell.png",
-    },
+    name: "Side Plank (R)",
+    image: { src: "/Side_Plank.png" },
   },
+  Vacuum: { id: 26, name: "Vacuum", image: { src: "/stock-cell.png" } },
 } as const;
 
 export const ITEMS: Workout[] = [
   {
     id: 1,
-    name: "light",
-    difficulty: WorkoutDifficulty.Beginner,
-    averageDurationSeconds: 900,
-    image: {
-      src: "/stock-row.png",
-    },
-    sets: [
-      {
-        repeatCount: 2,
-        restSeconds: 90,
-        exercises: [
-          {
-            exercise: ExercisesMap["охотничья собака (левая рука)"],
-            count: 6,
-            type: "reps",
-          },
-          {
-            exercise: ExercisesMap["охотничья собака (правая рука)"],
-            count: 6,
-            type: "reps",
-          },
-          {
-            exercise: ExercisesMap["скручивания"],
-            count: 15,
-            type: "reps",
-          },
-          {
-            exercise: ExercisesMap["подъемы таза (левая нога)"],
-            count: 6,
-            type: "reps",
-          },
-          {
-            exercise: ExercisesMap["подъемы таза (правая нога)"],
-            count: 6,
-            type: "reps",
-          },
-          {
-            exercise: ExercisesMap["планка"],
-            count: 20,
-            type: "time",
-          },
-          {
-            exercise: ExercisesMap["подъем на носке (обе ноги)"],
-            count: 15,
-            type: "reps",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Full body A",
+    name: "Full Body A (Thu)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3000,
-    image: {
-      src: "/stock-row.png",
-    },
+    image: { src: "/stock-row.png" },
     sets: [
-      {
-        repeatCount: 4,
-        restSeconds: 110,
-        exercises: [
-          {
-            exercise: ExercisesMap["становая тяга"],
-            count: 7,
-            type: "reps",
-          },
-        ],
-      },
-      {
-        repeatCount: 4,
-        restSeconds: 110,
-        exercises: [
-          {
-            exercise: ExercisesMap["приседания"],
-            count: 10,
-            type: "reps",
-          },
-        ],
-      },
       {
         repeatCount: 3,
         restSeconds: 90,
         exercises: [
           {
-            exercise: ExercisesMap["тяга в наклоне"],
-            count: 10,
-            type: "reps",
-          },
-        ],
-      },
-      {
-        repeatCount: 3,
-        restSeconds: 52,
-        exercises: [
-          {
-            exercise: ExercisesMap["подъемы таза (левая нога)"],
-            count: 13,
-            type: "reps",
-          },
-          {
-            exercise: ExercisesMap["подъемы таза (правая нога)"],
-            count: 13,
-            type: "reps",
-          },
-        ],
-      },
-      {
-        repeatCount: 3,
-        restSeconds: 60,
-        exercises: [
-          {
-            exercise: ExercisesMap["косые скручивания"],
-            count: 20,
-            type: "reps",
-          },
-        ],
-      },
-      {
-        repeatCount: 3,
-        restSeconds: 60,
-        exercises: [
-          {
-            exercise: ExercisesMap["подъем на носке (левая нога)"],
-            count: 20,
-            type: "reps",
-          },
-          {
-            exercise: ExercisesMap["подъем на носке (правая нога)"],
-            count: 20,
-            type: "reps",
-          },
-          {
-            exercise: ExercisesMap["подъем на носке (обе ноги)"],
-            count: 20,
-            type: "reps",
-          },
-        ],
-      },
-      {
-        repeatCount: 3,
-        restSeconds: 60,
-        exercises: [
-          {
-            exercise: ExercisesMap["гиперэкстензия"],
-            count: 12,
-            type: "reps",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Full body B",
-    difficulty: WorkoutDifficulty.Beginner,
-    averageDurationSeconds: 3000,
-    image: {
-      src: "/stock-row.png",
-    },
-    sets: [
-      {
-        repeatCount: 4,
-        restSeconds: 90,
-        exercises: [
-          {
-            exercise: ExercisesMap["разведение гантелей лёжа"],
+            exercise: ExercisesMap["Romanian Deadlift"],
             count: 8,
             type: "reps",
           },
@@ -351,34 +141,11 @@ export const ITEMS: Workout[] = [
       },
       {
         repeatCount: 3,
-        restSeconds: 60,
+        restSeconds: 90,
         exercises: [
           {
-            exercise: ExercisesMap["разгибение за спиной (левая рука)"],
-            count: 6,
-            type: "reps",
-          },
-          {
-            exercise: ExercisesMap["разгибение за спиной (правая рука)"],
-            count: 6,
-            type: "reps",
-          },
-        ],
-      },
-      {
-        repeatCount: 3,
-        restSeconds: 60,
-        exercises: [
-          {
-            exercise:
-              ExercisesMap["сгибание на бицепс с гантелей (левая рука)"],
-            count: 6,
-            type: "reps",
-          },
-          {
-            exercise:
-              ExercisesMap["сгибание на бицепс с гантелей (правая рука)"],
-            count: 6,
+            exercise: ExercisesMap["Bodyweight Squat"],
+            count: 10,
             type: "reps",
           },
         ],
@@ -387,38 +154,95 @@ export const ITEMS: Workout[] = [
         repeatCount: 3,
         restSeconds: 90,
         exercises: [
+          { exercise: ExercisesMap["Bent-over Row"], count: 8, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 60,
+        exercises: [
           {
-            exercise: ExercisesMap["выпады назад (на каждую ногу)"],
+            exercise: ExercisesMap["Glute Bridge (Left)"],
+            count: 10,
+            type: "reps",
+          },
+          {
+            exercise: ExercisesMap["Glute Bridge (Right)"],
             count: 10,
             type: "reps",
           },
         ],
       },
       {
-        repeatCount: 3,
+        repeatCount: 2,
         restSeconds: 60,
         exercises: [
+          { exercise: ExercisesMap["Oblique Crunch"], count: 20, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 45,
+        exercises: [
+          { exercise: ExercisesMap["Back Extension"], count: 12, type: "reps" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Full Body B (Sun)",
+    difficulty: WorkoutDifficulty.Beginner,
+    averageDurationSeconds: 3000,
+    image: { src: "/stock-row.png" },
+    sets: [
+      {
+        repeatCount: 3,
+        restSeconds: 90,
+        exercises: [
           {
-            exercise: ExercisesMap["скручивания"],
-            count: 20,
+            exercise: ExercisesMap["Chest Fly (Dumbbell)"],
+            count: 8,
             type: "reps",
           },
         ],
       },
       {
-        repeatCount: 3,
+        repeatCount: 2,
         restSeconds: 60,
         exercises: [
           {
-            exercise: ExercisesMap["сгибание кисти с гантелей (левая рука)"],
-            count: 10,
+            exercise: ExercisesMap["Dumbbell One Arm Triceps Extension (L)"],
+            count: 6,
             type: "reps",
           },
           {
-            exercise: ExercisesMap["сгибание кисти с гантелей (правая рука)"],
-            count: 10,
+            exercise: ExercisesMap["Dumbbell One Arm Triceps Extension (R)"],
+            count: 6,
             type: "reps",
           },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 60,
+        exercises: [
+          { exercise: ExercisesMap["Bicep Curl (L)"], count: 6, type: "reps" },
+          { exercise: ExercisesMap["Bicep Curl (R)"], count: 6, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 90,
+        exercises: [
+          { exercise: ExercisesMap["Rear Lunge"], count: 10, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 60,
+        exercises: [
+          { exercise: ExercisesMap["Crunch"], count: 20, type: "reps" },
         ],
       },
       {
@@ -426,10 +250,64 @@ export const ITEMS: Workout[] = [
         restSeconds: 60,
         exercises: [
           {
-            exercise: ExercisesMap["беговая дорожка"],
-            count: 900,
+            exercise: ExercisesMap["Treadmill Walk"],
+            count: 600,
             type: "time",
           },
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Core & Mobility (Tue)",
+    difficulty: WorkoutDifficulty.Beginner,
+    averageDurationSeconds: 1800,
+    image: { src: "/stock-row.png" },
+    sets: [
+      {
+        repeatCount: 2,
+        restSeconds: 30,
+        exercises: [
+          { exercise: ExercisesMap["Cat Cow"], count: 10, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 45,
+        exercises: [
+          { exercise: ExercisesMap["Bird Dog"], count: 10, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 45,
+        exercises: [
+          { exercise: ExercisesMap["Dead Bug"], count: 10, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 45,
+        exercises: [
+          { exercise: ExercisesMap["Side Plank (L)"], count: 30, type: "time" },
+          { exercise: ExercisesMap["Side Plank (R)"], count: 30, type: "time" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: "Vacuum Practice (Mon/Wed/Fri)",
+    difficulty: WorkoutDifficulty.Beginner,
+    averageDurationSeconds: 600,
+    image: { src: "/stock-row.png" },
+    sets: [
+      {
+        repeatCount: 3,
+        restSeconds: 30,
+        exercises: [
+          { exercise: ExercisesMap["Vacuum"], count: 20, type: "time" },
         ],
       },
     ],

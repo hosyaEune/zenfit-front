@@ -143,7 +143,14 @@ export default function WorkoutPreview({
         <Heading lineHeight={1.33} fontSize="3xl" fontWeight="bold">
           {name}
         </Heading>
-        <Box flex={1} overflowY="scroll" mb={4}>
+        <Box
+          flex={1}
+          overflowY="scroll"
+          mb={4}
+          _scrollbar={{
+            display: "none",
+          }}
+        >
           <SetList items={sets} />
         </Box>
         <Button onClick={onClick} background="blue" size="xl" rounded="full">
