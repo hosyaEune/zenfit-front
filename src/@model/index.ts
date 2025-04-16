@@ -17,6 +17,7 @@ export type Exercise = {
   id: number;
   name: string;
   image: ExerciseImage;
+  met: number;
 };
 
 type CommonSetExercise = {

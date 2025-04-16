@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Text } from "@chakra-ui/react";
 import { useParams } from "wouter";
 
-import { ITEMS, REST_ID } from "@/@mock";
+import { ITEMS, REST_ID, user } from "@/@mock";
 import type { Workout } from "@/@model";
 import { WorkoutCogratulations } from "@/pages/WorkoutCogratulations";
 import { WorkoutExercive } from "@/pages/WorkoutExercive";
@@ -12,6 +12,9 @@ import { TimeHelper } from "@/shared/utils/helpers/time-helper";
 import { useQuery } from "@/shared/utils/hooks/use-query";
 
 const previewIndex = -1;
+
+const exerciseCalories = (MET: number, weight: number, minutes: number) =>
+  0.0175 * MET * weight * minutes;
 
 const useGetWorkoutById = (id: string | number) => {
   const { data, isLoading } = useQuery({
@@ -33,6 +36,7 @@ const useGetWorkoutById = (id: string | number) => {
             image: {
               src: "/stock-cell.png",
             },
+            met: 1.7,
           },
         } as Workout["sets"][number]["exercises"][number],
       ]);
@@ -41,6 +45,10 @@ const useGetWorkoutById = (id: string | number) => {
 
     return acc;
   }, [] as Workout["sets"][number]["exercises"]);
+  // удаляем последний отдых
+  if (allExercise[allExercise.length - 1]?.exercise?.id === REST_ID) {
+    allExercise.pop();
+  }
 
   const restCount = allExercise.reduce((acc, curr) => {
     if (curr.exercise.id === REST_ID) {
@@ -64,6 +72,8 @@ export default function Workout() {
   const params = useParams();
   const skipCount = useRef(0);
   const startDate = useRef(new Date());
+  const calRef = useRef<number>(0);
+  const exerciseStartTime = useRef(new Date());
   const { id } = params;
   const { allExercise, restCount, workout } = useGetWorkoutById(id ?? "0");
 
@@ -74,7 +84,7 @@ export default function Workout() {
           (Number(new Date()) - Number(startDate.current)) / 1000
         )}
         countExercises={allExercise.length - restCount - skipCount.current}
-        expendCalories={0}
+        expendCalories={Number(calRef.current.toFixed(0))}
       />
     );
   }
@@ -98,6 +108,15 @@ export default function Workout() {
   }
 
   const onNextHandler = () => {
+    const deltaSecound =
+      (Number(new Date()) - Number(exerciseStartTime.current)) / 1000;
+
+    const MET = allExercise[currentExerciseIndex].exercise.met;
+    const calories = exerciseCalories(MET, user.weight, deltaSecound / 60);
+
+    calRef.current += calories;
+
+    exerciseStartTime.current = new Date();
     setCurrentExerciseIndex((prev) => prev + 1);
   };
 
