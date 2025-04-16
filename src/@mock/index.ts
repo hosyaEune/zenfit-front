@@ -13,10 +13,10 @@ export const ExercisesMap = {
     image: { src: "/Romanian_Deadlift.png" },
     met: 6.0,
   },
-  "Bodyweight Squat": {
+  Squat: {
     id: 2,
-    name: "Bodyweight Squat",
-    image: { src: "/stock-cell.png" },
+    name: "Squat",
+    image: { src: "/Squat.png" },
     met: 5.0,
   },
   "Bent-over Row": {
@@ -78,31 +78,31 @@ export const ExercisesMap = {
   "Dumbbell One Arm Triceps Extension (L)": {
     id: 12,
     name: "Dumbbell One Arm Triceps Extension (L)",
-    image: { src: "/stock-cell.png" },
+    image: { src: "/Dumbbell_One Arm_Triceps_Extension.png" },
     met: 4.0,
   },
   "Dumbbell One Arm Triceps Extension (R)": {
     id: 13,
     name: "Dumbbell One Arm Triceps Extension (R)",
-    image: { src: "/stock-cell.png" },
+    image: { src: "/Dumbbell_One Arm_Triceps_Extension.png" },
     met: 4.0,
   },
   "Bicep Curl (L)": {
     id: 14,
     name: "Bicep Curl (L)",
-    image: { src: "/stock-cell.png" },
+    image: { src: "/Bicep_Curl.png" },
     met: 4.0,
   },
   "Bicep Curl (R)": {
     id: 15,
     name: "Bicep Curl (R)",
-    image: { src: "/stock-cell.png" },
+    image: { src: "/Bicep_Curl.png" },
     met: 4.0,
   },
   "Rear Lunge": {
     id: 16,
     name: "Rear Lunge",
-    image: { src: "/stock-cell.png" },
+    image: { src: "/Rear_Lunge.png" },
     met: 5.5,
   },
   Crunch: {
@@ -167,6 +167,31 @@ export const ExercisesMap = {
     image: { src: "/stock-cell.png" },
     met: 2.2,
   },
+  // Posture
+  "Chin Tuck": {
+    id: 27,
+    name: "Chin Tuck",
+    image: { src: "/stock-cell.png" },
+    met: 2.1,
+  },
+  "Wall Angel": {
+    id: 28,
+    name: "Wall Angel",
+    image: { src: "/stock-cell.png" },
+    met: 2.1,
+  },
+  "SCM Stretch": {
+    id: 29,
+    name: "SCM Stretch",
+    image: { src: "/stock-cell.png" },
+    met: 2.1,
+  },
+  "Chest Stretch": {
+    id: 30,
+    name: "Chest Stretch",
+    image: { src: "/stock-cell.png" },
+    met: 2.1,
+  },
 } as const;
 
 export const ITEMS: Workout[] = [
@@ -193,7 +218,7 @@ export const ITEMS: Workout[] = [
         restSeconds: 90,
         exercises: [
           {
-            exercise: ExercisesMap["Bodyweight Squat"],
+            exercise: ExercisesMap["Squat"],
             count: 10,
             type: "reps",
           },
@@ -347,11 +372,39 @@ export const ITEMS: Workout[] = [
   },
   {
     id: 4,
-    name: "Vacuum Practice (Mon/Wed/Fri)",
+    name: "Posture & Vacuum Practice (Mon/Wed/Fri)",
     difficulty: WorkoutDifficulty.Beginner,
-    averageDurationSeconds: 600,
+    averageDurationSeconds: 900,
     image: { src: "/stock-row.png" },
     sets: [
+      {
+        repeatCount: 3,
+        restSeconds: 30,
+        exercises: [
+          { exercise: ExercisesMap["Chin Tuck"], count: 10, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 30,
+        exercises: [
+          { exercise: ExercisesMap["Wall Angel"], count: 10, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 20,
+        exercises: [
+          { exercise: ExercisesMap["SCM Stretch"], count: 30, type: "time" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 20,
+        exercises: [
+          { exercise: ExercisesMap["Chest Stretch"], count: 30, type: "time" },
+        ],
+      },
       {
         repeatCount: 3,
         restSeconds: 30,
