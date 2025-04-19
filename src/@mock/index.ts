@@ -172,25 +172,37 @@ export const ExercisesMap = {
     id: 27,
     name: "Chin Tuck",
     image: { src: "/stock-cell.png" },
-    met: 2.1,
+    met: 1.9,
   },
   "Wall Angel": {
     id: 28,
     name: "Wall Angel",
     image: { src: "/stock-cell.png" },
-    met: 2.1,
+    met: 1.9,
   },
-  "SCM Stretch": {
+  "SCM Stretch (L)": {
     id: 29,
+    name: "SCM Stretch  (L)",
+    image: { src: "/stock-cell.png" },
+    met: 1.9,
+  },
+  "SCM Stretch (R)": {
+    id: 30,
     name: "SCM Stretch",
     image: { src: "/stock-cell.png" },
-    met: 2.1,
+    met: 1.9,
   },
-  "Chest Stretch": {
-    id: 30,
-    name: "Chest Stretch",
+  "Chest Stretch (L)": {
+    id: 31,
+    name: "Chest Stretch (L)",
     image: { src: "/stock-cell.png" },
-    met: 2.1,
+    met: 1.9,
+  },
+  "Chest Stretch (R)": {
+    id: 32,
+    name: "Chest Stretch (R)",
+    image: { src: "/stock-cell.png" },
+    met: 1.9,
   },
 } as const;
 
@@ -372,7 +384,7 @@ export const ITEMS: Workout[] = [
   },
   {
     id: 4,
-    name: "Posture & Vacuum Practice (Mon/Wed/Fri)",
+    name: "Posture & Vacuum Practice (Everyday)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 900,
     image: { src: "/stock-row.png" },
@@ -395,14 +407,32 @@ export const ITEMS: Workout[] = [
         repeatCount: 2,
         restSeconds: 20,
         exercises: [
-          { exercise: ExercisesMap["SCM Stretch"], count: 30, type: "time" },
+          {
+            exercise: ExercisesMap["SCM Stretch (L)"],
+            count: 30,
+            type: "time",
+          },
+          {
+            exercise: ExercisesMap["SCM Stretch (R)"],
+            count: 30,
+            type: "time",
+          },
         ],
       },
       {
         repeatCount: 2,
         restSeconds: 20,
         exercises: [
-          { exercise: ExercisesMap["Chest Stretch"], count: 30, type: "time" },
+          {
+            exercise: ExercisesMap["Chest Stretch (L)"],
+            count: 30,
+            type: "time",
+          },
+          {
+            exercise: ExercisesMap["Chest Stretch (R)"],
+            count: 30,
+            type: "time",
+          },
         ],
       },
       {
@@ -410,6 +440,14 @@ export const ITEMS: Workout[] = [
         restSeconds: 30,
         exercises: [
           { exercise: ExercisesMap["Vacuum"], count: 20, type: "time" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 30,
+        exercises: [
+          { exercise: ExercisesMap["Side Plank (L)"], count: 20, type: "time" },
+          { exercise: ExercisesMap["Side Plank (R)"], count: 20, type: "time" },
         ],
       },
     ],
