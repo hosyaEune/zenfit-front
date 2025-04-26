@@ -212,7 +212,7 @@ export const ITEMS: Workout[] = [
     name: "Full Body A (Thu)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3000,
-    image: { src: "/stock-row-small.png", lqip: 57377 },
+    image: { src: "/stock-row-small.webp", lqip: 57377 },
     sets: [
       {
         repeatCount: 3,
@@ -280,7 +280,7 @@ export const ITEMS: Workout[] = [
     name: "Full Body B (Sun)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3000,
-    image: { src: "/stock-row-small.png", lqip: 57377 },
+    image: { src: "/stock-row-small.webp", lqip: 57377 },
     sets: [
       {
         repeatCount: 3,
@@ -349,7 +349,7 @@ export const ITEMS: Workout[] = [
     name: "Core & Mobility (Tue)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 1800,
-    image: { src: "/stock-row-small.png", lqip: 57377 },
+    image: { src: "/stock-row-small.webp", lqip: 57377 },
     sets: [
       {
         repeatCount: 2,
@@ -387,7 +387,7 @@ export const ITEMS: Workout[] = [
     name: "Posture & Vacuum Practice (Everyday)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 900,
-    image: { src: "/stock-row-small.png", lqip: 57377 },
+    image: { src: "/stock-row-small.webp", lqip: 57377 },
     sets: [
       {
         repeatCount: 3,
