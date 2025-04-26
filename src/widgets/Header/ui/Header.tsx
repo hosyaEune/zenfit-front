@@ -22,7 +22,7 @@ export default function Header({
   rightElement,
 }: Props) {
   return (
-    <Flex alignItems="center" justifyContent="space-between">
+    <Flex alignItems="center" justifyContent="space-between" gap={2}>
       {leftElement ?? <DefaultLeftElement />}
       <Flex flex={1} justifyContent="center">
         {typeof centerElement === "string" ? (
