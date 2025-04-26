@@ -1,31 +1,15 @@
-import { Center, Flex, Loader } from "@chakra-ui/react";
-import { Link } from "wouter";
+import { Flex } from "@chakra-ui/react";
 
-import { ITEMS } from "@/@mock";
-import { WorkoutRow } from "@/entities/WorkoutRow";
-import { useQuery } from "@/shared/utils/hooks/use-query";
+import { BlockWithTitle } from "@/@global/wrappers/BlockWithTitle";
+import { WorkoutList } from "@/widgets/WorkoutList";
 
 export default function Home() {
-  const { data } = useQuery({
-    queryKey: "workouts",
-    queryFn: async () => ITEMS,
-  });
-
-  if (!data) {
-    return (
-      <Center flex={1}>
-        <Loader />
-      </Center>
-    );
-  }
-
   return (
-    <Flex direction="column" gap={4}>
-      {(data ?? []).map((item) => (
-        <Link to={`/workout/${item.id}`} key={item.id}>
-          <WorkoutRow {...item} />
-        </Link>
-      ))}
+    <Flex direction="column">
+      <BlockWithTitle title="workout plan for you">
+        <WorkoutList />
+        <WorkoutList />
+      </BlockWithTitle>
     </Flex>
   );
 }

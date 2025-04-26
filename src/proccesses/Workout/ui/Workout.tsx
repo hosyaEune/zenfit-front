@@ -3,8 +3,8 @@ import { useRef, useState } from "react";
 import { Text } from "@chakra-ui/react";
 import { useParams } from "wouter";
 
-import { ITEMS, REST_ID, user } from "@/@mock";
-import type { Workout } from "@/@model";
+import { ITEMS, REST_ID, user } from "@/@global/mock";
+import type { Workout } from "@/@global/types";
 import { WorkoutCogratulations } from "@/pages/WorkoutCogratulations";
 import { WorkoutExercive } from "@/pages/WorkoutExercive";
 import { WorkoutPreview } from "@/pages/WorkoutPreview";

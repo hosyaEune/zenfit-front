@@ -1,11 +1,12 @@
-import { type Workout, WorkoutDifficulty } from "@/@model";
+import type { Exercise, Workout } from "./types";
+import { WorkoutDifficulty } from "./types";
 
 export const REST_ID = 0;
 export const user = {
   weight: 79,
 };
 
-export const ExercisesMap = {
+export const ExercisesMap: Record<string, Exercise> = {
   // Full Body A
   "Romanian Deadlift": {
     id: 1,

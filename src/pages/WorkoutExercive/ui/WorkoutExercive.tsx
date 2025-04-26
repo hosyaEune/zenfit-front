@@ -1,34 +1,15 @@
-import { type FC, useEffect, useRef, useState } from "react";
+import { Box, Button, Flex, Progress, Span, Text } from "@chakra-ui/react";
+import { AiOutlineClose } from "react-icons/ai";
 
-import {
-  Box,
-  Button,
-  Flex,
-  Progress,
-  Span,
-  Switch,
-  Text,
-} from "@chakra-ui/react";
-import NumberFlow, { NumberFlowGroup } from "@number-flow/react";
-import type { ReactNode } from "react";
-import {
-  AiFillCaretRight,
-  AiFillSound,
-  AiOutlineCheck,
-  AiOutlineClose,
-  AiOutlinePause,
-} from "react-icons/ai";
-import { MdOutlineNotifications, MdVibration } from "react-icons/md";
+import { DoneButton } from "./DoneButton";
 
-import { REST_ID } from "@/@mock";
-import type { Workout } from "@/@model";
-import { App } from "@/@singleton/App";
-import { PageWithPadding } from "@/app";
+import type { Workout } from "@/@global/types";
+import { PageWithHeader } from "@/@global/wrappers/PageWithHeader";
+import { PageWithPadding } from "@/@global/wrappers/PageWithPadding";
+import { ButtonSoundController } from "@/features/ButtonSoundController";
 import { ImageWithLQIP } from "@/shared/ui/image-with-lqip";
-import { TimeHelper } from "@/shared/utils/helpers/time-helper";
-import { usePromiseLikeBottomSheetModal } from "@/shared/utils/hooks/use-promise-like-bottom-sheet-modal";
 
-type Props = {
+export type Props = {
   countExercises: number;
   currentExercise: number;
   onSkip: () => void;
@@ -37,305 +18,6 @@ type Props = {
   onCancel: () => void;
   onDone: () => void;
 } & Workout["sets"][number]["exercises"][number];
-// TODO: говнокод
-type SOUND_SETTING_ITEM_PROPS = {
-  name: string;
-  title: string;
-  getIsChecked: () => boolean;
-  icon: ReactNode;
-  onChange: (isChecked: boolean) => void;
-};
-const cacheValues = {
-  vibration: {
-    value: App.getInstance().settings.vibrate.isEnabled,
-    onChange: (isChecked: boolean) =>
-      (App.getInstance().settings.vibrate.isEnabled = isChecked),
-  },
-  push: {
-    value: App.getInstance().settings.pushNotification.isEnabled,
-    onChange: (isChecked: boolean) => {
-      if (isChecked) {
-        App.getInstance()
-          .settings.pushNotification.getPermission()
-          .then(
-            () => (App.getInstance().settings.pushNotification.isEnabled = true)
-          )
-          .catch(
-            () =>
-              (App.getInstance().settings.pushNotification.isEnabled = false)
-          );
-      } else {
-        App.getInstance()
-          .settings.pushNotification.getPermission()
-          .then(
-            () =>
-              (App.getInstance().settings.pushNotification.isEnabled = false)
-          );
-      }
-    },
-  },
-};
-// TODO: при изменении менять в настройках
-const SOUND_SETTING_ITEMS: SOUND_SETTING_ITEM_PROPS[] = [
-  {
-    name: "vibration",
-    title: "enable vibration",
-    getIsChecked: () => App.getInstance().settings.vibrate.isEnabled,
-    icon: <MdVibration size={20} />,
-    onChange: (isChecked: boolean) =>
-      (cacheValues["vibration"].value = isChecked),
-  },
-  {
-    name: "push",
-    title: "enable push notification",
-    getIsChecked: () => App.getInstance().settings.pushNotification.isEnabled,
-    icon: <MdOutlineNotifications size={20} />,
-    onChange: (isChecked: boolean) => (cacheValues["push"].value = isChecked),
-  },
-];
-
-const ButtonSoundSettingItem: FC<SOUND_SETTING_ITEM_PROPS> = ({
-  icon,
-  title,
-  getIsChecked,
-  onChange,
-}) => {
-  const [isChecked, setIsChecked] = useState(getIsChecked());
-
-  const onToggle = () => {
-    setIsChecked((prev) => {
-      const value = !prev;
-      onChange(value);
-
-      return value;
-    });
-  };
-
-  return (
-    <Flex justifyContent="space-between" alignItems="center">
-      <Flex alignItems="center" gap={2}>
-        <Flex width={5} justifyContent="center">
-          {icon}
-        </Flex>
-        <Text _firstLetter={{ textTransform: "uppercase" }} fontWeight="bold">
-          {title}
-        </Text>
-      </Flex>
-
-      <Switch.Root defaultChecked={getIsChecked()} onChange={onToggle}>
-        <Switch.HiddenInput />
-        <Switch.Control bg={isChecked ? "blue" : "blue.300"} />
-      </Switch.Root>
-    </Flex>
-  );
-};
-
-const ButtonSoundControllerFooter: FC<{
-  onCancel: () => void;
-  onOk: () => void;
-}> = ({ onCancel, onOk }) => (
-  <Flex gap={4} width="100%">
-    <Button
-      flex={1}
-      background="blue.200"
-      size="xl"
-      rounded="full"
-      onClick={onCancel}
-    >
-      <Span textTransform="capitalize" color="blue">
-        cancel
-      </Span>
-    </Button>
-    <Button flex={1} background="blue" size="xl" rounded="full" onClick={onOk}>
-      <Span textTransform="capitalize">ok</Span>
-    </Button>
-  </Flex>
-);
-
-const ButtonSoundController: FC = () => {
-  const [modal, openModal] = usePromiseLikeBottomSheetModal();
-
-  const onClickHandler = () => {
-    openModal({
-      renderComponent: () => (
-        <Flex direction="column" gap={4}>
-          {SOUND_SETTING_ITEMS.map((item) => (
-            <ButtonSoundSettingItem key={item.title} {...item} />
-          ))}
-        </Flex>
-      ),
-      renderFooter: (onResolve, onReject) => (
-        <ButtonSoundControllerFooter
-          onOk={onResolve}
-          onCancel={() => {
-            onReject(undefined);
-          }}
-        />
-      ),
-      modalProps: {
-        title: (
-          <Text textAlign="center" w="100%" textTransform="capitalize">
-            sound settings
-          </Text>
-        ),
-      },
-    })
-      .then(() => {
-        console.log(cacheValues);
-        Object.values(cacheValues).forEach(({ value, onChange }) => {
-          onChange(value);
-        });
-
-        App.getInstance().saveSettings();
-      })
-      .catch(() => {
-        console.log("zdec cancel");
-      });
-  };
-
-  return (
-    <>
-      <Button onClick={onClickHandler} variant="ghost">
-        <AiFillSound />
-      </Button>
-      {modal}
-    </>
-  );
-};
-
-const Header: FC<Props> = ({ currentExercise, countExercises, onCancel }) => (
-  <Flex height="40px" flex={1} alignItems="center">
-    <Button onClick={onCancel} variant="ghost">
-      <AiOutlineClose />
-    </Button>
-    <Box flex={1}>
-      <Progress.Root
-        value={currentExercise}
-        max={countExercises}
-        size="lg"
-        variant="outline"
-        animated={true}
-      >
-        <Progress.Track borderRadius="xl" background="gray.100">
-          <Progress.Range background="blue" />
-        </Progress.Track>
-      </Progress.Root>
-    </Box>
-    <ButtonSoundController />
-  </Flex>
-);
-
-const Timer: FC<{
-  count: number;
-  stop?: boolean;
-  onComplete?: () => void;
-}> = ({ count, stop = false, onComplete }) => {
-  const [remaining, setRemaining] = useState(count);
-  const [isRunning, setIsRunning] = useState(true);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  const [, mm, ss] = TimeHelper.splitSeconds(remaining);
-
-  useEffect(() => {
-    if (isRunning && remaining > 0) {
-      intervalRef.current = setInterval(() => {
-        if (!stop) {
-          setRemaining((prev) => prev - 1);
-        }
-      }, 1000);
-    }
-
-    if (remaining === 0 && isRunning) {
-      setIsRunning(false);
-      onComplete?.();
-    }
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isRunning, remaining, onComplete, stop]);
-
-  return (
-    <Text color="black" fontSize="5xl">
-      <NumberFlowGroup>
-        <NumberFlow
-          trend={-1}
-          value={mm}
-          digits={{ 1: { max: 5 } }}
-          format={{ minimumIntegerDigits: 2 }}
-        />
-        <NumberFlow
-          prefix=":"
-          trend={-1}
-          value={ss}
-          digits={{ 1: { max: 5 } }}
-          format={{ minimumIntegerDigits: 2 }}
-        />
-      </NumberFlowGroup>
-    </Text>
-  );
-};
-
-const DoneButton: FC<Props> = ({ type, count, onDone, exercise }) => {
-  const [isReady, setIsReady] = useState(type === "reps");
-  const [isPause, setIsPause] = useState(
-    type === "time" && exercise.id !== REST_ID
-  );
-
-  return (
-    <>
-      <Box>
-        {type === "reps" ? (
-          <Text fontSize="5xl">X{count}</Text>
-        ) : (
-          <Timer
-            count={count}
-            stop={isPause}
-            onComplete={async () => {
-              App.getInstance().settings.pushNotification.execute(
-                "Время вышло"
-              );
-              App.getInstance().settings.vibrate.execute();
-
-              setIsReady(true);
-            }}
-          />
-        )}
-      </Box>
-      <Box width="100%">
-        {isReady ? (
-          <Button
-            background="blue"
-            size="xl"
-            rounded="full"
-            width="100%"
-            onClick={onDone}
-          >
-            <AiOutlineCheck size={6} />
-            <Span textTransform="capitalize">done</Span>
-          </Button>
-        ) : (
-          <Button
-            background="blue"
-            size="xl"
-            rounded="full"
-            width="100%"
-            onClick={() => setIsPause((prev) => !prev)}
-          >
-            {isPause ? (
-              <AiFillCaretRight size={6} />
-            ) : (
-              <AiOutlinePause size={6} />
-            )}
-            <Span textTransform="capitalize">
-              {isPause ? "Start" : "Pause"}
-            </Span>
-          </Button>
-        )}
-      </Box>
-    </>
-  );
-};
 
 // TODO: опечатка
 export default function WorkoutExercive(props: Props) {
@@ -353,12 +35,30 @@ export default function WorkoutExercive(props: Props) {
   const isLastExercive = currentExercise === countExercises - 1;
 
   return (
-    <Flex direction="column" flex={1}>
-      <Box>
-        <Header {...props} />
-      </Box>
-
-      <PageWithPadding>
+    <PageWithPadding>
+      <PageWithHeader
+        leftElement={
+          <Button size="xs" onClick={onCancel} variant="ghost">
+            <AiOutlineClose />
+          </Button>
+        }
+        centerElement={
+          <Box flex={1}>
+            <Progress.Root
+              value={currentExercise}
+              max={countExercises}
+              size="lg"
+              variant="outline"
+              animated={true}
+            >
+              <Progress.Track borderRadius="xl" background="gray.100">
+                <Progress.Range background="blue" />
+              </Progress.Track>
+            </Progress.Root>
+          </Box>
+        }
+        rightElement={<ButtonSoundController />}
+      >
         <Box padding={4}>
           <ImageWithLQIP
             {...image}
@@ -409,7 +109,7 @@ export default function WorkoutExercive(props: Props) {
             </Button>
           </Flex>
         </Flex>
-      </PageWithPadding>
-    </Flex>
+      </PageWithHeader>
+    </PageWithPadding>
   );
 }

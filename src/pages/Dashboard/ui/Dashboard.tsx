@@ -21,9 +21,9 @@ import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoAddCircleOutline } from "react-icons/io5";
 
-import { ExercisesMap } from "@/@mock";
-import type { Workout } from "@/@model";
-import { WorkoutDifficulty } from "@/@model";
+import { ExercisesMap } from "@/@global/mock";
+import type { Workout } from "@/@global/types";
+import { WorkoutDifficulty } from "@/@global/types";
 
 const workoutDifficulties = createListCollection({
   items: Object.values(WorkoutDifficulty).map((name) => ({

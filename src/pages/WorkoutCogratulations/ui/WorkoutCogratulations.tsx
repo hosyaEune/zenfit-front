@@ -12,7 +12,7 @@ import { AiFillClockCircle, AiFillFire } from "react-icons/ai";
 import { TbBarbellFilled } from "react-icons/tb";
 import { Link } from "wouter";
 
-import { PageWithPadding, PATHS } from "@/app";
+import { PageWithPadding } from "@/@global/wrappers/PageWithPadding";
 
 type Props = {
   countExercises: number;
