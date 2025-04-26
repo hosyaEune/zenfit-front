@@ -1,111 +1,118 @@
-abstract class Settings {
-  isEnabled = false;
+// Interfaces for settings functionality
+interface ISettings {
+  name: string;
+  isEnabled: boolean;
+  execute(...args: unknown[]): Promise<void>;
+  getPermission(): Promise<unknown>;
+}
 
-  onChange(isEnabled: boolean) {
-    this.isEnabled = isEnabled;
+interface ISettingsManager {
+  getSettings(): Record<string, ISettings>;
+  saveSettings(): void;
+  restoreSettings(): void;
+  requestPermissions(): Promise<unknown[]>;
+}
+
+// Base settings implementation
+abstract class BaseSettings implements ISettings {
+  protected constructor(
+    public readonly name: string,
+    protected enabled: boolean = false
+  ) {}
+
+  get isEnabled(): boolean {
+    return this.enabled;
   }
 
-  execute(...args: unknown[]) {
-    if (!this.isEnabled) return;
-
-    this._execute(...args);
+  set isEnabled(value: boolean) {
+    this.enabled = value;
   }
 
-  abstract name: string;
+  async execute(...args: unknown[]): Promise<void> {
+    if (!this.enabled) return;
+    await this.handleExecute(...args);
+  }
+
   abstract getPermission(): Promise<unknown>;
-  protected abstract _execute(...args: unknown[]): Promise<void>;
+  protected abstract handleExecute(...args: unknown[]): Promise<void>;
 
   toJSON() {
     return {
       name: this.name,
-      isEnabled: this.isEnabled,
+      isEnabled: this.enabled,
     };
   }
 }
 
-class Vibrate extends Settings {
-  name = "vibrate";
-
-  protected async _execute() {
-    if (navigator.vibrate) {
-      navigator.vibrate([300, 150, 300]); // вибрация 200мс, пауза 100мс, вибрация 200мс
-    }
+// Concrete settings implementations
+class VibrateSettings extends BaseSettings {
+  constructor() {
+    super("vibrate");
   }
-  async getPermission() {
+
+  async getPermission(): Promise<void> {
     return;
   }
+
+  protected async handleExecute(): Promise<void> {
+    if (navigator.vibrate) {
+      navigator.vibrate([300, 150, 300]);
+    }
+  }
 }
-class PushNotification extends Settings {
-  name = "pushNotification";
 
-  title: string;
-
-  constructor(title: string) {
-    super();
-    this.title = title;
+class NotificationSettings extends BaseSettings {
+  constructor(private readonly title: string) {
+    super("pushNotification");
   }
 
-  async getPermission() {
+  async getPermission(): Promise<NotificationPermission> {
     return Notification.requestPermission();
   }
 
-  protected async _execute(text: string) {
+  protected async handleExecute(text: string): Promise<void> {
     const registration = await navigator.serviceWorker.getRegistration();
 
     if (!registration) {
-      console.log("Сервис-воркер не найден");
+      console.warn("Service worker not found");
 
       return;
     }
 
-    registration.showNotification(this.title, {
+    await registration.showNotification(this.title, {
       body: text,
-      //   TODO: добавить картинки
       icon: "/icon-192x192.png",
       badge: "/badge-icon.png",
     });
   }
 }
 
-export class App {
-  appName = "zenFit";
+// Settings manager implementation
+class SettingsManager implements ISettingsManager {
+  private readonly settings: Record<string, ISettings> = {};
 
-  settings: Record<string, Settings> = {};
-
-  private static instance: App;
-
-  constructor() {
-    this.settings.vibrate = new Vibrate();
-    this.settings.pushNotification = new PushNotification(this.appName);
+  constructor(private readonly appName: string) {
+    this.initializeSettings();
   }
 
-  public static getInstance(): App {
-    if (!App.instance) {
-      const app = new App();
-
-      App.instance = app;
-    }
-
-    return App.instance;
+  private initializeSettings(): void {
+    this.settings.vibrate = new VibrateSettings();
+    this.settings.pushNotification = new NotificationSettings(this.appName);
   }
 
-  public async requestPermissions() {
-    if (typeof window === "undefined") return;
+  getSettings(): Record<string, ISettings> {
+    return this.settings;
+  }
 
-    const permissions: Promise<unknown>[] = Object.values(this.settings).map(
-      (settings) => settings.getPermission()
+  async requestPermissions(): Promise<unknown[]> {
+    if (typeof window === "undefined") return [];
+
+    return Promise.all(
+      Object.values(this.settings).map((settings) => settings.getPermission())
     );
-
-    return Promise.all(permissions);
   }
 
-  public requestNoSleep() {
-    if (navigator.wakeLock) {
-      navigator.wakeLock.request("screen");
-    }
-  }
-
-  public saveSettigns() {
+  saveSettings(): void {
     if (typeof window === "undefined") return;
 
     localStorage.setItem(
@@ -114,17 +121,60 @@ export class App {
     );
   }
 
-  public restoreSettings() {
+  restoreSettings(): void {
     if (typeof window === "undefined") return;
 
-    const settings = JSON.parse(localStorage.getItem("settings") || "[]") as [
-      Settings
-    ];
+    const savedSettings = JSON.parse(
+      localStorage.getItem("settings") || "[]"
+    ) as ISettings[];
 
-    settings.forEach((s) => {
-      if (this.settings[s.name]) {
-        this.settings[s.name].isEnabled = s.isEnabled;
+    savedSettings.forEach((saved) => {
+      const setting = this.settings[saved.name];
+      if (setting) {
+        setting.isEnabled = saved.isEnabled;
       }
     });
+  }
+}
+
+// Main App class using singleton pattern
+export class App {
+  private static instance: App | null = null;
+  private readonly settingsManager: ISettingsManager;
+
+  private constructor() {
+    this.settingsManager = new SettingsManager("zenFit");
+  }
+
+  static getInstance(): App {
+    if (!App.instance) {
+      App.instance = new App();
+    }
+
+    return App.instance;
+  }
+
+  get settings(): Record<string, ISettings> {
+    return this.settingsManager.getSettings();
+  }
+
+  async requestPermissions(): Promise<unknown[]> {
+    return this.settingsManager.requestPermissions();
+  }
+
+  requestNoSleep(): Promise<WakeLockSentinel | null> {
+    if (navigator.wakeLock) {
+      return navigator.wakeLock.request("screen");
+    }
+
+    return Promise.resolve(null);
+  }
+
+  saveSettings(): void {
+    this.settingsManager.saveSettings();
+  }
+
+  restoreSettings(): void {
+    this.settingsManager.restoreSettings();
   }
 }

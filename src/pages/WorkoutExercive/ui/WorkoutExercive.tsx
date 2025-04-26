@@ -4,12 +4,12 @@ import {
   Box,
   Button,
   Flex,
-  Image,
   Progress,
   Span,
   Switch,
   Text,
 } from "@chakra-ui/react";
+import NumberFlow, { NumberFlowGroup } from "@number-flow/react";
 import type { ReactNode } from "react";
 import {
   AiFillCaretRight,
@@ -24,6 +24,7 @@ import { REST_ID } from "@/@mock";
 import type { Workout } from "@/@model";
 import { App } from "@/@singleton/App";
 import { PageWithPadding } from "@/app";
+import { ImageWithLQIP } from "@/shared/ui/image-with-lqip";
 import { TimeHelper } from "@/shared/utils/helpers/time-helper";
 import { usePromiseLikeBottomSheetModal } from "@/shared/utils/hooks/use-promise-like-bottom-sheet-modal";
 
@@ -48,16 +49,29 @@ const cacheValues = {
   vibration: {
     value: App.getInstance().settings.vibrate.isEnabled,
     onChange: (isChecked: boolean) =>
-      App.getInstance().settings.vibrate.onChange(isChecked),
+      (App.getInstance().settings.vibrate.isEnabled = isChecked),
   },
   push: {
     value: App.getInstance().settings.pushNotification.isEnabled,
     onChange: (isChecked: boolean) => {
-      App.getInstance()
-        .settings.pushNotification.getPermission()
-        .then(() =>
-          App.getInstance().settings.pushNotification.onChange(isChecked)
-        );
+      if (isChecked) {
+        App.getInstance()
+          .settings.pushNotification.getPermission()
+          .then(
+            () => (App.getInstance().settings.pushNotification.isEnabled = true)
+          )
+          .catch(
+            () =>
+              (App.getInstance().settings.pushNotification.isEnabled = false)
+          );
+      } else {
+        App.getInstance()
+          .settings.pushNotification.getPermission()
+          .then(
+            () =>
+              (App.getInstance().settings.pushNotification.isEnabled = false)
+          );
+      }
     },
   },
 };
@@ -116,6 +130,28 @@ const ButtonSoundSettingItem: FC<SOUND_SETTING_ITEM_PROPS> = ({
   );
 };
 
+const ButtonSoundControllerFooter: FC<{
+  onCancel: () => void;
+  onOk: () => void;
+}> = ({ onCancel, onOk }) => (
+  <Flex gap={4} width="100%">
+    <Button
+      flex={1}
+      background="blue.200"
+      size="xl"
+      rounded="full"
+      onClick={onCancel}
+    >
+      <Span textTransform="capitalize" color="blue">
+        cancel
+      </Span>
+    </Button>
+    <Button flex={1} background="blue" size="xl" rounded="full" onClick={onOk}>
+      <Span textTransform="capitalize">ok</Span>
+    </Button>
+  </Flex>
+);
+
 const ButtonSoundController: FC = () => {
   const [modal, openModal] = usePromiseLikeBottomSheetModal();
 
@@ -129,32 +165,12 @@ const ButtonSoundController: FC = () => {
         </Flex>
       ),
       renderFooter: (onResolve, onReject) => (
-        <Flex gap={4} width="100%">
-          <Button
-            flex={1}
-            background="blue.200"
-            size="xl"
-            rounded="full"
-            onClick={() => {
-              onReject(undefined);
-            }}
-          >
-            <Span textTransform="capitalize" color="blue">
-              cancel
-            </Span>
-          </Button>
-          <Button
-            flex={1}
-            background="blue"
-            size="xl"
-            rounded="full"
-            onClick={() => {
-              onResolve();
-            }}
-          >
-            <Span textTransform="capitalize">ok</Span>
-          </Button>
-        </Flex>
+        <ButtonSoundControllerFooter
+          onOk={onResolve}
+          onCancel={() => {
+            onReject(undefined);
+          }}
+        />
       ),
       modalProps: {
         title: (
@@ -165,14 +181,12 @@ const ButtonSoundController: FC = () => {
       },
     })
       .then(() => {
+        console.log(cacheValues);
         Object.values(cacheValues).forEach(({ value, onChange }) => {
           onChange(value);
         });
 
-        App.getInstance().saveSettigns();
-
-        console.log("zdec ok");
-        console.log(App.getInstance());
+        App.getInstance().saveSettings();
       })
       .catch(() => {
         console.log("zdec cancel");
@@ -220,6 +234,8 @@ const Timer: FC<{
   const [isRunning, setIsRunning] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  const [, mm, ss] = TimeHelper.splitSeconds(remaining);
+
   useEffect(() => {
     if (isRunning && remaining > 0) {
       intervalRef.current = setInterval(() => {
@@ -241,7 +257,21 @@ const Timer: FC<{
 
   return (
     <Text color="black" fontSize="5xl">
-      {TimeHelper.formatDuration(remaining)}
+      <NumberFlowGroup>
+        <NumberFlow
+          trend={-1}
+          value={mm}
+          digits={{ 1: { max: 5 } }}
+          format={{ minimumIntegerDigits: 2 }}
+        />
+        <NumberFlow
+          prefix=":"
+          trend={-1}
+          value={ss}
+          digits={{ 1: { max: 5 } }}
+          format={{ minimumIntegerDigits: 2 }}
+        />
+      </NumberFlowGroup>
     </Text>
   );
 };
@@ -330,8 +360,8 @@ export default function WorkoutExercive(props: Props) {
 
       <PageWithPadding>
         <Box padding={4}>
-          <Image
-            src={image.src}
+          <ImageWithLQIP
+            {...image}
             alt="exercive image"
             maxWidth="100%"
             aspectRatio="1/1"

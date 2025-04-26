@@ -10,61 +10,61 @@ export const ExercisesMap = {
   "Romanian Deadlift": {
     id: 1,
     name: "Romanian Deadlift",
-    image: { src: "/Romanian_Deadlift.png" },
+    image: { lqip: 173538, src: "/Romanian_Deadlift.png" },
     met: 6.0,
   },
   Squat: {
     id: 2,
     name: "Squat",
-    image: { src: "/Squat.png" },
+    image: { lqip: 173538, src: "/Squat.png" },
     met: 5.0,
   },
   "Bent-over Row": {
     id: 3,
     name: "Bent-over Row",
-    image: { src: "/Bent-over_Row.png" },
+    image: { lqip: 173538, src: "/Bent-over_Row.png" },
     met: 6.0,
   },
-  "Glute Bridge (Left)": {
+  "Glute Bridge (L)": {
     id: 4,
-    name: "Glute Bridge (Left)",
-    image: { src: "/Glute_Bridge.png" },
+    name: "Glute Bridge (L)",
+    image: { lqip: 173538, src: "/Glute_Bridge.png" },
     met: 3.5,
   },
-  "Glute Bridge (Right)": {
+  "Glute Bridge (R)": {
     id: 5,
-    name: "Glute Bridge (Right)",
-    image: { src: "/Glute_Bridge.png" },
+    name: "Glute Bridge (R)",
+    image: { lqip: 173538, src: "/Glute_Bridge.png" },
     met: 3.5,
   },
   "Oblique Crunch": {
     id: 6,
     name: "Oblique Crunch",
-    image: { src: "/Oblique_Crunch.png" },
+    image: { lqip: 173538, src: "/Oblique_Crunch.png" },
     met: 3.8,
   },
-  "Calf Raise (Left)": {
+  "Calf Raise (L)": {
     id: 7,
-    name: "Calf Raise (Left)",
-    image: { src: "/Calf_Raise.png" },
+    name: "Calf Raise (L)",
+    image: { lqip: 173538, src: "/Calf_Raise.png" },
     met: 4.5,
   },
-  "Calf Raise (Right)": {
+  "Calf Raise (R)": {
     id: 8,
-    name: "Calf Raise (Right)",
-    image: { src: "/Calf_Raise.png" },
+    name: "Calf Raise (R)",
+    image: { lqip: 173538, src: "/Calf_Raise.png" },
     met: 4.5,
   },
   "Calf Raise (Both)": {
     id: 9,
     name: "Calf Raise (Both)",
-    image: { src: "/Calf_Raise.png" },
+    image: { lqip: 173538, src: "/Calf_Raise.png" },
     met: 4.5,
   },
   "Back Extension": {
     id: 10,
     name: "Back Extension",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 4.0,
   },
 
@@ -72,61 +72,61 @@ export const ExercisesMap = {
   "Chest Fly (Dumbbell)": {
     id: 11,
     name: "Chest Fly (Dumbbell)",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 5.0,
   },
   "Dumbbell One Arm Triceps Extension (L)": {
     id: 12,
     name: "Dumbbell One Arm Triceps Extension (L)",
-    image: { src: "/Dumbbell_One Arm_Triceps_Extension.png" },
+    image: { lqip: 173538, src: "/Dumbbell_One Arm_Triceps_Extension.png" },
     met: 4.0,
   },
   "Dumbbell One Arm Triceps Extension (R)": {
     id: 13,
     name: "Dumbbell One Arm Triceps Extension (R)",
-    image: { src: "/Dumbbell_One Arm_Triceps_Extension.png" },
+    image: { lqip: 173538, src: "/Dumbbell_One Arm_Triceps_Extension.png" },
     met: 4.0,
   },
   "Bicep Curl (L)": {
     id: 14,
     name: "Bicep Curl (L)",
-    image: { src: "/Bicep_Curl.png" },
+    image: { lqip: 173538, src: "/Bicep_Curl.png" },
     met: 4.0,
   },
   "Bicep Curl (R)": {
     id: 15,
     name: "Bicep Curl (R)",
-    image: { src: "/Bicep_Curl.png" },
+    image: { lqip: 173538, src: "/Bicep_Curl.png" },
     met: 4.0,
   },
   "Rear Lunge": {
     id: 16,
     name: "Rear Lunge",
-    image: { src: "/Rear_Lunge.png" },
+    image: { lqip: 173538, src: "/Rear_Lunge.png" },
     met: 5.5,
   },
   Crunch: {
     id: 17,
     name: "Crunch",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 3.8,
   },
   "Wrist Curl (L)": {
     id: 18,
     name: "Wrist Curl (L)",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 2.8,
   },
   "Wrist Curl (R)": {
     id: 19,
     name: "Wrist Curl (R)",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 2.8,
   },
   "Treadmill Walk": {
     id: 20,
     name: "Treadmill Walk",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 3.5,
   },
 
@@ -134,74 +134,74 @@ export const ExercisesMap = {
   "Cat Cow": {
     id: 21,
     name: "Cat Cow",
-    image: { src: "/Cat_Cow.png" },
+    image: { lqip: 173538, src: "/Cat_Cow.png" },
     met: 2.2,
   },
   "Bird Dog": {
     id: 22,
     name: "Bird Dog",
-    image: { src: "/Bird_Dog.png" },
+    image: { lqip: 173538, src: "/Bird_Dog.png" },
     met: 3.0,
   },
   "Dead Bug": {
     id: 23,
     name: "Dead Bug",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 3.0,
   },
   "Side Plank (L)": {
     id: 24,
     name: "Side Plank (L)",
-    image: { src: "/Side_Plank.png" },
+    image: { lqip: 173538, src: "/Side_Plank.png" },
     met: 3.3,
   },
   "Side Plank (R)": {
     id: 25,
     name: "Side Plank (R)",
-    image: { src: "/Side_Plank.png" },
+    image: { lqip: 173538, src: "/Side_Plank.png" },
     met: 3.3,
   },
   Vacuum: {
     id: 26,
     name: "Vacuum",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 2.2,
   },
   // Posture
   "Chin Tuck": {
     id: 27,
     name: "Chin Tuck",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 1.9,
   },
   "Wall Angel": {
     id: 28,
     name: "Wall Angel",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 1.9,
   },
   "SCM Stretch (L)": {
     id: 29,
     name: "SCM Stretch  (L)",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 1.9,
   },
   "SCM Stretch (R)": {
     id: 30,
-    name: "SCM Stretch",
-    image: { src: "/stock-cell.png" },
+    name: "SCM Stretch (R)",
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 1.9,
   },
   "Chest Stretch (L)": {
     id: 31,
     name: "Chest Stretch (L)",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 1.9,
   },
   "Chest Stretch (R)": {
     id: 32,
     name: "Chest Stretch (R)",
-    image: { src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/stock-cell.png" },
     met: 1.9,
   },
 } as const;
@@ -212,7 +212,7 @@ export const ITEMS: Workout[] = [
     name: "Full Body A (Thu)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3000,
-    image: { src: "/stock-row.png" },
+    image: { src: "/stock-row.png", lqip: 57377 },
     sets: [
       {
         repeatCount: 3,
@@ -248,12 +248,12 @@ export const ITEMS: Workout[] = [
         restSeconds: 60,
         exercises: [
           {
-            exercise: ExercisesMap["Glute Bridge (Left)"],
+            exercise: ExercisesMap["Glute Bridge (L)"],
             count: 10,
             type: "reps",
           },
           {
-            exercise: ExercisesMap["Glute Bridge (Right)"],
+            exercise: ExercisesMap["Glute Bridge (R)"],
             count: 10,
             type: "reps",
           },
@@ -280,7 +280,7 @@ export const ITEMS: Workout[] = [
     name: "Full Body B (Sun)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3000,
-    image: { src: "/stock-row.png" },
+    image: { src: "/stock-row.png", lqip: 57377 },
     sets: [
       {
         repeatCount: 3,
@@ -349,7 +349,7 @@ export const ITEMS: Workout[] = [
     name: "Core & Mobility (Tue)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 1800,
-    image: { src: "/stock-row.png" },
+    image: { src: "/stock-row.png", lqip: 57377 },
     sets: [
       {
         repeatCount: 2,
@@ -387,7 +387,7 @@ export const ITEMS: Workout[] = [
     name: "Posture & Vacuum Practice (Everyday)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 900,
-    image: { src: "/stock-row.png" },
+    image: { src: "/stock-row.png", lqip: 57377 },
     sets: [
       {
         repeatCount: 3,

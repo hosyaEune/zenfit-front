@@ -10,6 +10,7 @@ export enum WorkoutDifficulty {
 // Картинка (можно расширять до ImageWithAlt или ImageWithMeta)
 export type ExerciseImage = {
   src: string;
+  lqip: number;
 };
 
 // Конкретное упражнение

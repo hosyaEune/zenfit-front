@@ -1,6 +1,7 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 import type { Workout } from "@/@model";
+import { ImageWithLQIP } from "@/shared/ui/image-with-lqip";
 import { TimeHelper } from "@/shared/utils/helpers/time-helper";
 
 type Props = Pick<
@@ -28,15 +29,7 @@ export default function WorkoutRow({
       overflow="hidden"
       borderRadius="lg"
     >
-      <Image
-        position="absolute"
-        width="100%"
-        height="100%"
-        objectFit="cover"
-        inset={0}
-        zIndex={1}
-        src={image.src}
-      />
+      <ImageWithLQIP position="absolute" inset={0} zIndex={1} {...image} />
       <Flex
         direction="column"
         justify="space-between"
@@ -45,11 +38,12 @@ export default function WorkoutRow({
         padding={6}
         height="100%"
         color="white"
+        textShadow="2px 2px 5px rgba(0, 0, 0, 0.5)"
       >
-        <Text fontSize="2xl" maxLines={1}>
+        <Text fontSize="2xl" lineClamp={1}>
           {name}
         </Text>
-        <Flex gap={2} fontSize="sm" textShadow="2px 2px 5px rgba(0, 0, 0, 0.5)">
+        <Flex gap={2} fontSize="sm">
           <Text>{TimeHelper.formatDuration(averageDurationSeconds)}</Text>
           <Text>&#9679;</Text>
           <Text textTransform="uppercase">{difficulty}</Text>

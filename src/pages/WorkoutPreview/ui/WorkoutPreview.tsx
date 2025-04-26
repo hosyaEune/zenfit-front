@@ -5,7 +5,6 @@ import {
   Flex,
   Heading,
   IconButton,
-  Image,
   List,
   Span,
 } from "@chakra-ui/react";
@@ -15,20 +14,18 @@ import { Link } from "wouter";
 
 import type { Workout } from "@/@model";
 import { PageWithPadding } from "@/app";
+import { ImageWithLQIP } from "@/shared/ui/image-with-lqip";
 import { TimeHelper } from "@/shared/utils/helpers/time-helper";
 
 const Header: FC<{
   image: Workout["image"];
 }> = ({ image }) => (
   <Box height={140} position="relative" zIndex={1}>
-    <Image
-      src={image.src}
+    <ImageWithLQIP
+      {...image}
       alt="head"
       zIndex={0}
-      height="100%"
-      width="100%"
       inset={0}
-      objectFit="cover"
       position="absolute"
     />
     <Flex
@@ -63,12 +60,10 @@ const ExerciseRow: FC<Workout["sets"][number]["exercises"][number]> = ({
   count,
 }) => (
   <Flex height={112} gap={4} alignItems="center">
-    <Image
-      aspectRatio="1/1"
-      borderRadius="lg"
-      height="100%"
-      src={exercise.image.src}
-    />
+    <Box height="100%" aspectRatio="1/1">
+      <ImageWithLQIP borderRadius="lg" {...exercise.image} />
+    </Box>
+
     <Flex direction="column" justifyContent="space-around" height="80%">
       <Span
         _firstLetter={{ textTransform: "uppercase" }}

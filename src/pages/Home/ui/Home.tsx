@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Center, Flex, Loader } from "@chakra-ui/react";
 import { Link } from "wouter";
 
 import { ITEMS } from "@/@mock";
@@ -10,6 +10,14 @@ export default function Home() {
     queryKey: "workouts",
     queryFn: async () => ITEMS,
   });
+
+  if (!data) {
+    return (
+      <Center flex={1}>
+        <Loader />
+      </Center>
+    );
+  }
 
   return (
     <Flex direction="column" gap={4}>

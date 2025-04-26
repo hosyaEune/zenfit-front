@@ -18,6 +18,7 @@ import { History } from "@/pages/History";
 import { Home } from "@/pages/Home";
 import { Report } from "@/pages/Report";
 import { Settings } from "@/pages/Settings";
+import { InitCollectionInformation } from "@/proccesses/InitCollectionInformation";
 import { Workout } from "@/proccesses/Workout";
 
 type Props = {
@@ -46,6 +47,7 @@ export const PATHS = {
   history: "/history",
   settings: "/settings",
   dashboard: "/dashboard",
+  collectionInformation: "/collection-information",
 };
 
 const MENU: {
@@ -126,7 +128,14 @@ const App: FC<Props> = () => {
   AppSettings.getInstance().requestPermissions();
 
   return (
-    <Flex height="100dvh" width="100%" direction="column" overflow="hidden">
+    <Flex
+      height="100dvh"
+      width="100%"
+      maxWidth={820}
+      direction="column"
+      overflow="hidden"
+      margin="0 auto"
+    >
       <Route
         path={PATHS.home}
         component={() => (
@@ -150,9 +159,15 @@ const App: FC<Props> = () => {
         path={PATHS.history}
         component={() => (
           <PageWithNavigation>
-            <History />
+            <PageWithPadding>
+              <History />
+            </PageWithPadding>
           </PageWithNavigation>
         )}
+      />
+      <Route
+        path={PATHS.collectionInformation}
+        component={() => <InitCollectionInformation />}
       />
       <Route
         path={PATHS.report}

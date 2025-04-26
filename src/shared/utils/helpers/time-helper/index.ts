@@ -1,8 +1,14 @@
 export class TimeHelper {
+  static splitSeconds(time: number) {
+    const seconds = TimeHelper.getSeconds(time);
+    const minutes = TimeHelper.getMinutes(time);
+    const hours = TimeHelper.getHours(time);
+
+    return [hours, minutes, seconds] as const;
+  }
+
   static formatDuration(time: number) {
-    const seconds = Math.floor(time % 60);
-    const minutes = Math.floor(time / 60) % 60;
-    const hours = Math.floor(time / 3600);
+    const [hours, minutes, seconds] = TimeHelper.splitSeconds(time);
     const secondsStr = `${seconds}`.padStart(2, "0");
     if (hours === 0) {
       return `${minutes}:${secondsStr}`;
