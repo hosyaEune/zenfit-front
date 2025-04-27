@@ -12,6 +12,7 @@ import { AiFillClockCircle, AiFillFire } from "react-icons/ai";
 import { TbBarbellFilled } from "react-icons/tb";
 import { Link } from "wouter";
 
+import { PATHS } from "@/@global/consts";
 import { PageWithPadding } from "@/@global/wrappers/PageWithPadding";
 
 type Props = {

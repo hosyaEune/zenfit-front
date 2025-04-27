@@ -8,7 +8,6 @@ export default function Home() {
     <Flex direction="column">
       <BlockWithTitle title="workout plan for you">
         <WorkoutList />
-        <WorkoutList />
       </BlockWithTitle>
     </Flex>
   );
