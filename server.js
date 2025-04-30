@@ -44,6 +44,7 @@ if (!isProduction) {
 
 // Serve HTML
 app.use("*all", async (req, res) => {
+  console.log(">>>>> server");
   try {
     const url = req.originalUrl.replace(base, "");
     const acceptEncoding = req.headers["accept-encoding"] || "";
