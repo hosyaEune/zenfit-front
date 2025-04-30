@@ -16,7 +16,12 @@ export default defineConfig({
       include: ["**/*.{js,jsx,ts,tsx}"], // Проверяемые файлы
     }),
     compression({
+      algorithm: "gzip",
+      deleteOriginalAssets: false,
+    }),
+    compression({
       algorithm: "brotliCompress",
+      deleteOriginalAssets: false,
     }),
     VitePWA({
       registerType: "autoUpdate",
