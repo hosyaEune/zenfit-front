@@ -2,6 +2,8 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
+import { compression } from "vite-plugin-compression2";
+
 // eslint-disable-next-line  @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import eslint from "vite-plugin-eslint";
@@ -12,6 +14,9 @@ export default defineConfig({
     react(),
     eslint({
       include: ["**/*.{js,jsx,ts,tsx}"], // Проверяемые файлы
+    }),
+    compression({
+      algorithm: "brotliCompress",
     }),
     VitePWA({
       registerType: "autoUpdate",
