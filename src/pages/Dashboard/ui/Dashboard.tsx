@@ -21,7 +21,7 @@ import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoAddCircleOutline } from "react-icons/io5";
 
-import { ExercisesMap } from "@/@global/mock";
+import { EXERCISES_MAP } from "@/@global/mock";
 import type { Workout } from "@/@global/types";
 import { WorkoutDifficulty } from "@/@global/types";
 
@@ -33,7 +33,7 @@ const workoutDifficulties = createListCollection({
 });
 
 const workoutExercises = createListCollection({
-  items: Object.values(ExercisesMap).map(({ id, name: label }) => ({
+  items: Object.values(EXERCISES_MAP).map(({ id, name: label }) => ({
     label,
     value: `${id}`,
   })),
@@ -240,7 +240,7 @@ function FieldExercises({
                 value={[String(field.value.id)]}
                 onValueChange={({ value }) => {
                   const id = value[0];
-                  const exercise = Object.values(ExercisesMap).find(
+                  const exercise = Object.values(EXERCISES_MAP).find(
                     (ex) => ex.id === Number(id)
                   );
 
@@ -340,7 +340,7 @@ function FieldExercises({
           append({
             type: "reps",
             count: 60,
-            exercise: ExercisesMap["приседания"],
+            exercise: EXERCISES_MAP["приседания"],
           })
         }
         width="full"

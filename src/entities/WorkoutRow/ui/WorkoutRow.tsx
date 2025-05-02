@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 
-import type { Workout } from "@/@model";
+import type { Workout } from "@/@global/types";
 import { ImageWithLQIP } from "@/shared/ui/image-with-lqip";
 import { TimeHelper } from "@/shared/utils/helpers/time-helper";
 

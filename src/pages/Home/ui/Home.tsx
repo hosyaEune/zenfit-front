@@ -5,7 +5,7 @@ import { WorkoutList } from "@/widgets/WorkoutList";
 
 export default function Home() {
   return (
-    <Flex direction="column">
+    <Flex direction="column" height="100%" overflow="hidden">
       <BlockWithTitle title="workout plan for you">
         <WorkoutList />
       </BlockWithTitle>

@@ -20,7 +20,14 @@ export default function WorkoutList() {
   }
 
   return (
-    <Flex direction="column" gap={4}>
+    <Flex
+      direction="column"
+      gap={4}
+      overflowY="auto"
+      _scrollbar={{
+        display: "none",
+      }}
+    >
       {(data ?? []).map((item) => (
         <Link to={`/workout/${item.id}`} key={item.id}>
           <WorkoutRow {...item} />

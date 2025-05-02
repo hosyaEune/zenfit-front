@@ -9,7 +9,15 @@ type Props = {
 } & HeaderProps;
 
 export const PageWithHeader: FC<Props> = ({ children, ...props }) => (
-  <Flex direction="column" gap={4} flex={1} overflowY="auto">
+  <Flex
+    direction="column"
+    gap={4}
+    flex={1}
+    overflowY="auto"
+    _scrollbar={{
+      display: "none",
+    }}
+  >
     <Header {...props} />
     {children}
   </Flex>

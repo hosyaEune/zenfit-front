@@ -12,8 +12,8 @@ import type { FC } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "wouter";
 
+import type { Workout } from "@/@global/types";
 import { PageWithPadding } from "@/@global/wrappers/PageWithPadding";
-import type { Workout } from "@/@model";
 import { ImageWithLQIP } from "@/shared/ui/image-with-lqip";
 import { TimeHelper } from "@/shared/utils/helpers/time-helper";
 
