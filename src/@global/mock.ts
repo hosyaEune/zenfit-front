@@ -26,16 +26,16 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
     image: { lqip: 173538, src: "/Bent-over_Row.png" },
     met: 6.0,
   },
-  "Shrug (L)": {
+  "Dumbbell Shrug (L)": {
     id: 39,
-    name: "Shrug (L)",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    name: "Dumbbell Shrug (L)",
+    image: { lqip: 173538, src: "/Dumbbell_Shrug.png" },
     met: 3.8,
   },
-  "Shrug (R)": {
+  "Dumbbell Shrug (R)": {
     id: 40,
-    name: "Shrug (R)",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    name: "Dumbbell Shrug (R)",
+    image: { lqip: 173538, src: "/Dumbbell_Shrug.png" },
     met: 3.8,
   },
   "Oblique Crunch": {
@@ -49,13 +49,13 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
   "Chest Fly (Dumbbell)": {
     id: 11,
     name: "Chest Fly (Dumbbell)",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Dumbbell_Fly.png" },
     met: 5.0,
   },
   "Dumbbell Shoulder Press": {
     id: 33,
     name: "Dumbbell Shoulder Press",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Dumbbell_Shoulder_Press.png" },
     met: 5.0,
   },
   "Rear Lunge": {
@@ -99,13 +99,13 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
   "Bulgarian Split Squat (L)": {
     id: 35,
     name: "Bulgarian Split Squat (L)",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Bulgarian_Split_Squat.png" },
     met: 5.5,
   },
   "Bulgarian Split Squat (R)": {
     id: 36,
     name: "Bulgarian Split Squat (R)",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Bulgarian_Split_Squat.png" },
     met: 5.5,
   },
   "Glute Bridge (L)": {
@@ -123,19 +123,19 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
   "Lateral Raise": {
     id: 34,
     name: "Lateral Raise",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Lateral_Raise.png" },
     met: 4.5,
   },
   "Dumbbell Row (L)": {
     id: 37,
     name: "Dumbbell Row (L)",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Dumbbell_Row.png" },
     met: 5.0,
   },
   "Dumbbell Row (R)": {
     id: 38,
     name: "Dumbbell Row (R)",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Dumbbell_Row.png" },
     met: 5.0,
   },
   Vacuum: {
@@ -253,8 +253,16 @@ export const ITEMS: Workout[] = [
         repeatCount: 3,
         restSeconds: 60,
         exercises: [
-          { exercise: EXERCISES_MAP["Shrug (L)"], count: 15, type: "reps" },
-          { exercise: EXERCISES_MAP["Shrug (R)"], count: 15, type: "reps" },
+          {
+            exercise: EXERCISES_MAP["Dumbbell Shrug (L)"],
+            count: 15,
+            type: "reps",
+          },
+          {
+            exercise: EXERCISES_MAP["Dumbbell Shrug (R)"],
+            count: 15,
+            type: "reps",
+          },
         ],
       },
       {

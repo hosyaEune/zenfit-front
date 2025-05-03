@@ -25,21 +25,26 @@ const useGetWorkoutById = (id: string | number) => {
   const allExercise = (data?.sets ?? []).reduce((acc, set) => {
     const exercises = Array(set.repeatCount)
       .fill(null)
-      .flatMap(() => [
-        ...set.exercises,
-        {
-          type: "time",
-          count: set.restSeconds,
-          exercise: {
-            id: REST_ID,
-            name: "Отдых",
-            image: {
-              src: "/stock-cell.png",
+      .flatMap(() => {
+        const setExercises = [...set.exercises];
+
+        if (set.restSeconds > 0) {
+          setExercises.push({
+            type: "time",
+            count: set.restSeconds,
+            exercise: {
+              id: REST_ID,
+              name: "Отдых",
+              image: {
+                src: "/Rest.png",
+              },
+              met: 1.7,
             },
-            met: 1.7,
-          },
-        } as Workout["sets"][number]["exercises"][number],
-      ]);
+          } as Workout["sets"][number]["exercises"][number]);
+        }
+
+        return setExercises;
+      });
 
     acc.push(...exercises);
 
