@@ -91,7 +91,7 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
   Crunch: {
     id: 17,
     name: "Crunch",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Crunch.png" },
     met: 3.8,
   },
 
@@ -141,8 +141,14 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
   Vacuum: {
     id: 26,
     name: "Vacuum",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Vacuum.png" },
     met: 2.2,
+  },
+  "Front Plank": {
+    id: 24,
+    name: "Front Plank",
+    image: { lqip: 173538, src: "/stock-cell.png" },
+    met: 3.3,
   },
   "Side Plank (L)": {
     id: 24,
@@ -181,13 +187,13 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
   "Chin Tuck": {
     id: 27,
     name: "Chin Tuck",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Chin_Tuck.png" },
     met: 1.9,
   },
   "Wall Angel": {
     id: 28,
     name: "Wall Angel",
-    image: { lqip: 173538, src: "/stock-cell.png" },
+    image: { lqip: 173538, src: "/Wall_Angel.png" },
     met: 1.9,
   },
   "SCM Stretch (L)": {
@@ -438,7 +444,7 @@ export const ITEMS: Workout[] = [
   },
   {
     id: 4,
-    name: "Core & Mobility (Thu)",
+    name: "Core & Mobility (Mon)",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 1800,
     image: { src: "/stock-row-small.webp", lqip: 57377 },
@@ -470,12 +476,12 @@ export const ITEMS: Workout[] = [
         exercises: [
           {
             exercise: EXERCISES_MAP["Side Plank (L)"],
-            count: 30,
+            count: 40,
             type: "time",
           },
           {
             exercise: EXERCISES_MAP["Side Plank (R)"],
-            count: 30,
+            count: 40,
             type: "time",
           },
         ],
@@ -547,13 +553,18 @@ export const ITEMS: Workout[] = [
         restSeconds: 30,
         exercises: [
           {
+            exercise: EXERCISES_MAP["Front Plank"],
+            count: 30,
+            type: "time",
+          },
+          {
             exercise: EXERCISES_MAP["Side Plank (L)"],
-            count: 20,
+            count: 30,
             type: "time",
           },
           {
             exercise: EXERCISES_MAP["Side Plank (R)"],
-            count: 20,
+            count: 30,
             type: "time",
           },
         ],
