@@ -7,7 +7,6 @@ export const user = {
 };
 
 export const EXERCISES_MAP: Record<string, Exercise> = {
-  // Full Body A
   "Romanian Deadlift": {
     id: 1,
     name: "Romanian Deadlift",
@@ -44,8 +43,6 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
     image: { lqip: 173538, src: "/Oblique_Crunch.png" },
     met: 3.8,
   },
-
-  // Full Body B
   "Chest Fly (Dumbbell)": {
     id: 11,
     name: "Chest Fly (Dumbbell)",
@@ -64,16 +61,16 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
     image: { lqip: 173538, src: "/Rear_Lunge.png" },
     met: 5.5,
   },
-  "Bicep Curl (L)": {
+  "Biceps Curl (L)": {
     id: 14,
     name: "Bicep Curl (L)",
-    image: { lqip: 173538, src: "/Bicep_Curl.png" },
+    image: { lqip: 173538, src: "/Biceps_Curl.png" },
     met: 4.0,
   },
-  "Bicep Curl (R)": {
+  "Biceps Curl (R)": {
     id: 15,
     name: "Bicep Curl (R)",
-    image: { lqip: 173538, src: "/Bicep_Curl.png" },
+    image: { lqip: 173538, src: "/Biceps_Curl.png" },
     met: 4.0,
   },
   "Dumbbell One Arm Triceps Extension (L)": {
@@ -94,8 +91,6 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
     image: { lqip: 173538, src: "/Crunch.png" },
     met: 3.8,
   },
-
-  // Full Body C
   "Bulgarian Split Squat (L)": {
     id: 35,
     name: "Bulgarian Split Squat (L)",
@@ -108,15 +103,9 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
     image: { lqip: 173538, src: "/Bulgarian_Split_Squat.png" },
     met: 5.5,
   },
-  "Glute Bridge (L)": {
+  "Glute Bridge": {
     id: 4,
-    name: "Glute Bridge (L)",
-    image: { lqip: 173538, src: "/Glute_Bridge.png" },
-    met: 3.5,
-  },
-  "Glute Bridge (R)": {
-    id: 5,
-    name: "Glute Bridge (R)",
+    name: "Glute Bridge",
     image: { lqip: 173538, src: "/Glute_Bridge.png" },
     met: 3.5,
   },
@@ -220,12 +209,93 @@ export const EXERCISES_MAP: Record<string, Exercise> = {
     image: { lqip: 173538, src: "/stock-cell.png" },
     met: 1.9,
   },
+  "Calf Raise": {
+    id: 33,
+    name: "Calf Raise",
+    image: { lqip: 173538, src: "/Calf_Raise.png" },
+    met: 3.5,
+  },
+  "Calf Raise (L)": {
+    id: 34,
+    name: "Calf Raise (L)",
+    image: { lqip: 173538, src: "/Calf_Raise.png" },
+    met: 5,
+  },
+  "Calf Raise (R)": {
+    id: 35,
+    name: "Calf Raise (R)",
+    image: { lqip: 173538, src: "/Calf_Raise.png" },
+    met: 5,
+  },
+  "Single-Leg Bridge (L)": {
+    id: 36,
+    name: "Single-Leg Bridge (L)",
+    image: { lqip: 173538, src: "/Single_Leg_Bridge.png" },
+    met: 5,
+  },
+  "Single-Leg Bridge (R)": {
+    id: 37,
+    name: "Single-Leg Bridge (R)",
+    image: { lqip: 173538, src: "/Single_Leg_Bridge.png" },
+    met: 5,
+  },
 } as const;
 
 export const ITEMS: Workout[] = [
   {
+    id: 4,
+    name: "(Mon) Core & Mobility",
+    difficulty: WorkoutDifficulty.Beginner,
+    averageDurationSeconds: 1800,
+    image: { src: "/stock-row-small.webp", lqip: 57377 },
+    sets: [
+      {
+        repeatCount: 2,
+        restSeconds: 30,
+        exercises: [
+          { exercise: EXERCISES_MAP["Cat Cow"], count: 10, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 45,
+        exercises: [
+          { exercise: EXERCISES_MAP["Bird Dog"], count: 10, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 45,
+        exercises: [
+          { exercise: EXERCISES_MAP["Dead Bug"], count: 10, type: "reps" },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 45,
+        exercises: [
+          {
+            exercise: EXERCISES_MAP["Front Plank"],
+            count: 30,
+            type: "time",
+          },
+          {
+            exercise: EXERCISES_MAP["Side Plank (L)"],
+            count: 40,
+            type: "time",
+          },
+          {
+            exercise: EXERCISES_MAP["Side Plank (R)"],
+            count: 40,
+            type: "time",
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: 1,
-    name: "Full Body A (Thu)",
+    name: "(Wed) Full Body A",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3300,
     image: { src: "/stock-row-small.webp", lqip: 57377 },
@@ -286,7 +356,7 @@ export const ITEMS: Workout[] = [
   },
   {
     id: 2,
-    name: "Full Body B (Sun)",
+    name: "(Fr) Full Body B",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3300,
     image: { src: "/stock-row-small.webp", lqip: 57377 },
@@ -325,12 +395,12 @@ export const ITEMS: Workout[] = [
         restSeconds: 60,
         exercises: [
           {
-            exercise: EXERCISES_MAP["Bicep Curl (L)"],
+            exercise: EXERCISES_MAP["Biceps Curl (L)"],
             count: 10,
             type: "reps",
           },
           {
-            exercise: EXERCISES_MAP["Bicep Curl (R)"],
+            exercise: EXERCISES_MAP["Biceps Curl (R)"],
             count: 10,
             type: "reps",
           },
@@ -353,7 +423,7 @@ export const ITEMS: Workout[] = [
         ],
       },
       {
-        repeatCount: 2,
+        repeatCount: 1,
         restSeconds: 60,
         exercises: [
           { exercise: EXERCISES_MAP["Crunch"], count: 20, type: "reps" },
@@ -363,7 +433,7 @@ export const ITEMS: Workout[] = [
   },
   {
     id: 3,
-    name: "Full Body C (Tue)",
+    name: "(Sun) Full Body C",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 3300,
     image: { src: "/stock-row-small.webp", lqip: 57377 },
@@ -373,13 +443,13 @@ export const ITEMS: Workout[] = [
         restSeconds: 90,
         exercises: [
           {
-            exercise: EXERCISES_MAP["Bulgarian Split Squat (L)"],
-            count: 8,
+            exercise: EXERCISES_MAP["Calf Raise (R)"],
+            count: 15,
             type: "reps",
           },
           {
-            exercise: EXERCISES_MAP["Bulgarian Split Squat (R)"],
-            count: 8,
+            exercise: EXERCISES_MAP["Calf Raise (L)"],
+            count: 15,
             type: "reps",
           },
         ],
@@ -389,12 +459,7 @@ export const ITEMS: Workout[] = [
         restSeconds: 90,
         exercises: [
           {
-            exercise: EXERCISES_MAP["Glute Bridge (L)"],
-            count: 12,
-            type: "reps",
-          },
-          {
-            exercise: EXERCISES_MAP["Glute Bridge (R)"],
+            exercise: EXERCISES_MAP["Glute Bridge"],
             count: 12,
             type: "reps",
           },
@@ -443,54 +508,70 @@ export const ITEMS: Workout[] = [
     ],
   },
   {
-    id: 4,
-    name: "Core & Mobility (Mon)",
+    id: 5,
+    name: "(Daily) Posture & Vacuum Practice light",
     difficulty: WorkoutDifficulty.Beginner,
-    averageDurationSeconds: 1800,
+    averageDurationSeconds: 900,
     image: { src: "/stock-row-small.webp", lqip: 57377 },
     sets: [
+      {
+        repeatCount: 3,
+        restSeconds: 30,
+        exercises: [
+          { exercise: EXERCISES_MAP["Chin Tuck"], count: 10, type: "reps" },
+        ],
+      },
       {
         repeatCount: 2,
         restSeconds: 30,
         exercises: [
-          { exercise: EXERCISES_MAP["Cat Cow"], count: 10, type: "reps" },
+          { exercise: EXERCISES_MAP["Wall Angel"], count: 10, type: "reps" },
         ],
       },
       {
         repeatCount: 2,
-        restSeconds: 45,
-        exercises: [
-          { exercise: EXERCISES_MAP["Bird Dog"], count: 10, type: "reps" },
-        ],
-      },
-      {
-        repeatCount: 2,
-        restSeconds: 45,
-        exercises: [
-          { exercise: EXERCISES_MAP["Dead Bug"], count: 10, type: "reps" },
-        ],
-      },
-      {
-        repeatCount: 2,
-        restSeconds: 45,
+        restSeconds: 20,
         exercises: [
           {
-            exercise: EXERCISES_MAP["Side Plank (L)"],
-            count: 40,
+            exercise: EXERCISES_MAP["SCM Stretch (L)"],
+            count: 30,
             type: "time",
           },
           {
-            exercise: EXERCISES_MAP["Side Plank (R)"],
-            count: 40,
+            exercise: EXERCISES_MAP["SCM Stretch (R)"],
+            count: 30,
             type: "time",
           },
+        ],
+      },
+      {
+        repeatCount: 2,
+        restSeconds: 20,
+        exercises: [
+          {
+            exercise: EXERCISES_MAP["Chest Stretch (L)"],
+            count: 30,
+            type: "time",
+          },
+          {
+            exercise: EXERCISES_MAP["Chest Stretch (R)"],
+            count: 30,
+            type: "time",
+          },
+        ],
+      },
+      {
+        repeatCount: 3,
+        restSeconds: 30,
+        exercises: [
+          { exercise: EXERCISES_MAP["Vacuum"], count: 20, type: "time" },
         ],
       },
     ],
   },
   {
-    id: 5,
-    name: "Posture & Vacuum Practice (Daily)",
+    id: 6,
+    name: "(Alternate day) Posture & Vacuum Practice",
     difficulty: WorkoutDifficulty.Beginner,
     averageDurationSeconds: 900,
     image: { src: "/stock-row-small.webp", lqip: 57377 },
